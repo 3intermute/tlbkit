@@ -3,7 +3,7 @@ tlbkit-objs := module.o bad.o
 
 
 all:
-	KCPPFLAGS="" make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	KCPPFLAGS="-O0" make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 	objdump -d tlbkit.ko > tlbkit.objdump
 
 clean:

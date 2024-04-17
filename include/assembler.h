@@ -6,6 +6,8 @@
 
 #define ARM64_INST_WIDTH 4
 
+// ARM64
+/*
 // https://developer.arm.com/documentation/ddi0596/2021-12/Base-Instructions/MOVK--Move-wide-with-keep-?lang=en
 // movk encoding:
 // 0 | 1 1 1 0 0 1 0 1 | 0 0 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 | 0 0 0 0 0
@@ -21,5 +23,8 @@ void assemble_absolute_load(uint32_t rd, uintptr_t addr, uint32_t *arr) {
     arr[2] = cpu_to_le32(assemble_movk((addr & 0xffff00000000) >> 32, 0b10, rd));
     arr[3] = cpu_to_le32(assemble_movk((addr & 0xffff000000000000) >> 48, 0b11, rd));
 }
+*/
+
+
 
 #endif

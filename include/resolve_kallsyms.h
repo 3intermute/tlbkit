@@ -55,7 +55,7 @@ unsigned long rk_kprobe_get_func_addr(const char *func_name) {
 
     unsigned long tmp = kp.addr;
     unregister_kprobe(&kp);
-    printk(KERN_DEBUG "resolve_kallsyms: register_kprobe found func %s @ %pK\n", func_name, tmp);
+    printk(KERN_DEBUG "resolve_kallsyms: register_kprobe found func %s @ %lx\n", func_name, tmp);
     return tmp;
 }
 
@@ -75,7 +75,7 @@ unsigned long rk_kallsyms_lookup_name(const char *symbol_name) {
     }
 
     unsigned long tmp = rk_kallsyms_lookup_name_internal(symbol_name);
-    printk(KERN_DEBUG "resolve_kallsyms: kallsyms_lookup_name found func %s @ %pK\n", symbol_name, tmp);
+    printk(KERN_DEBUG "resolve_kallsyms: kallsyms_lookup_name found func %s @ %lx\n", symbol_name, tmp);
     return tmp;
 }
 

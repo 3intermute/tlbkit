@@ -12,3 +12,9 @@ priority:
 
 
 // r0 -> r1, passing addr through r0, ordering may be fucked
+
+
+TODO transcribed 4/13/24:
+- test with -O0 compiler flag, is angr being overzealous ?
+- test with not replacing pgtable after swap
+- FIX ASID issue, mark page as global
