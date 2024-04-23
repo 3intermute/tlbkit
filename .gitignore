@@ -1,0 +1,9 @@
+dep.txt
+*.cmd
+*.ko
+*.mod.c
+*.o
+Module.symvers
+modules.order
+.tmp_versions/
+_module_build

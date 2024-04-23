@@ -1,0 +1,4 @@
+CompileFlags: # Tweak the parse settings, example directory given to show format
+  Add:
+    # - "-I=[folder]"         # old answer
+    - "-I/Users/null/Desktop/projects/tlbkit_backup/src/_module_build/include"            # e.g `-I/usr/include/SDL2`  suggested from @Palmkeep

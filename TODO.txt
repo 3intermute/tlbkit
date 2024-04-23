@@ -18,3 +18,11 @@ TODO transcribed 4/13/24:
 - test with -O0 compiler flag, is angr being overzealous ?
 - test with not replacing pgtable after swap
 - FIX ASID issue, mark page as global
+
+
+4/19/24:
+THE ISSUE IS IN THE WRITE PROTECTION !!
+code 0x80f is the write protect violation code
+check:
+- page alignment on page to ptep ?
+- write protect bit flip code correct ?
