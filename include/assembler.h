@@ -5,7 +5,7 @@
 #include <linux/delay.h>
 
 #define ARM_INST_WIDTH             4
-#define ARM_MOV32_INSTS            2
+#define ARM_MOV32_N_INST           2
 
 // arm32
 uint32_t assemble_movw(uint32_t imm16, uint32_t rd) {

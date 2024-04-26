@@ -40,6 +40,8 @@ pte_t *virt_to_ptep(uint32_t addr) {
     if (pud_none(*pudp)) {
         return NULL;
     }
+
+    // // not needed on arm32
     // if (pud_sect(*pudp)) {
     //     printk(KERN_INFO "debug: entry at pud virt_to_ptep success, virt (%pK), ptep @ %pK", addr, pudp);
     //     return pudp;
@@ -49,6 +51,8 @@ pte_t *virt_to_ptep(uint32_t addr) {
     if (pmd_none(*pmdp)) {
         return NULL;
     }
+
+    // // not needed on arm32
     // if (pmd_sect(*pmdp)) {
     //     printk(KERN_INFO "debug: entry at pmd virt_to_ptep success, virt (%pK), ptep @ %pK", addr, pmdp);
     //     return pmdp;
@@ -78,32 +82,22 @@ void ptep_flip_write_protect(pte_t *ptep) {
         printk(KERN_INFO "ptep_flip_write_protect: ptep %lx writeable, flipping\n", ptep);
         set_pte_ext(ptep, pte_wrprotect(*ptep), 0);
     }
-
-
-
-    // if (!pte_write(*ptep)) {
-    //         printk(KERN_INFO "ptep_flip_write_protect: ptep %lx not writeable, flipping, *ptep %lx\n", ptep, *ptep);
-    //         *ptep = pte_mkwrite(pte_mkdirty(*ptep));
-    //         printk(KERN_INFO "                         ptep %lx, *ptep %lx, pte_write(*ptep) %d\n", ptep, *ptep, pte_write(*ptep));
-    //         return;
-    // }
-    // printk(KERN_INFO "ptep_flip_write_protect: ptep %lx writeable, flipping\n", ptep);
-    // *ptep = pte_wrprotect(*ptep);
-    // dsb ?
 }
 
 // dep
-// void arm64_ptep_flip_write_protect(pte_t *ptep) {
-//     if (!pte_write(*ptep)) {
-//         *ptep = pte_mkwrite(pte_mkdirty(*ptep));
-//         *ptep = clear_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
+/*
+void arm64_ptep_flip_write_protect(pte_t *ptep) {
+    if (!pte_write(*ptep)) {
+        *ptep = pte_mkwrite(pte_mkdirty(*ptep));
+        *ptep = clear_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
 
-//         return;
-//     }
+        return;
+    }
 
-//     *ptep = pte_wrprotect(*ptep);
-//     *ptep = set_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
-// }
+    *ptep = pte_wrprotect(*ptep);
+    *ptep = set_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
+}
+*/
 
 static unsigned long highmem_pte_to_phys(pte_t *ptep) {
     struct page *p = pte_page(*ptep);
