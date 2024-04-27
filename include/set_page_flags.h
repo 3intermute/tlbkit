@@ -22,26 +22,70 @@ static void init_init_mm_ptr(void) {
     }
 }
 
-// // #define internal_pgd_offset_k(address)		pgd_offset(init_mm_ptr, (address))
-// pgd_offset_pgd(pgd, (address))
+static void internal_ptep_flip_write_protect(pte_t *ptep) {
+    if (!pte_write(*ptep)) {
+            printk(KERN_INFO "ptep_flip_write_protect: ptep %lx not writeable, flipping, *ptep %lx\n", ptep, *ptep);
+            set_pte_ext(ptep, pte_mkwrite(*ptep), 0);
+            printk(KERN_INFO "                         ptep %lx, *ptep %lx, pte_write(*ptep) %d\n", ptep, *ptep, pte_write(*ptep));
+    }
+    else {
+        printk(KERN_INFO "ptep_flip_write_protect: ptep %lx writeable, flipping\n", ptep);
+        set_pte_ext(ptep, pte_wrprotect(*ptep), 0);
+    }
+}
 
-// static inline pmd_t *internal_pmd_off_k(unsigned long va)
-// {
-//     init_init_mm_ptr();
-// 	return pmd_offset(pud_offset(p4d_offset(internal_pgd_offset_k(va), va), va), va);
-// }
+pte_t *virt_to_ptep(uint32_t addr) {
+    init_init_mm_ptr();
 
-// static inline pte_t *internal_virt_to_kpte(unsigned long vaddr)
-// {
-// 	pmd_t *pmd = internal_pmd_off_k(vaddr);
+    // check if highmem or lowmem
+    // return internal_virt_to_kpte(addr);
+    return highmem_virt_to_ptep(addr);
+}
 
-// 	return pmd_none(*pmd) ? NULL : pte_offset_kernel(pmd, vaddr);
-// }
+static int ptep_flip_write_protect(pte_t *pte, unsigned long addr, void *data) {
+    internal_ptep_flip_write_protect(pte);
+    return 0;
+}
 
 
 
+void apply_to_existing_page(uint32_t addr, pte_fn_t fn, void *data) {
+    init_init_mm_ptr();
+
+    uint32_t addr_aligned = addr & PAGE_MASK;
+
+    apply_to_existing_page_range(init_mm_ptr, addr_aligned, PAGE_SIZE, fn, data); // create, 512 mb ram, may be swapped ?
+}
+
+void pg_flip_write_protect(uint32_t addr) {
+    apply_to_existing_page(addr, ptep_flip_write_protect, NULL);
+}
+
+
+
+
+
+
+static unsigned long highmem_pte_to_phys(pte_t *ptep) {
+    struct page *p = pte_page(*ptep);
+    return page_to_phys(p);
+}
+
+static unsigned long highmem_virt_to_phys(unsigned long addr) {
+    unsigned long off = addr & ~PAGE_MASK;
+    unsigned long r = highmem_pte_to_phys(virt_to_ptep(addr)) + off;
+    // printk(KERN_INFO "debug: highmem_virt_to_phys on addr %lx, off %lx -> %lx\n", addr, off, r);
+    return r;
+}
+
+
+
+
+
+
+/* !!! DEPRECATED
 // IMPORTANT: this only works for highmem addresses perhaps due to split ttbr0, ttbr1
-pte_t *highmem_virt_to_ptep(uint32_t addr) {
+static pte_t *highmem_virt_to_ptep(uint32_t addr) {
     init_init_mm_ptr();
 
     addr &= PAGE_MASK; // TODO: do in 1 inst via PAGE_MASK
@@ -92,8 +136,8 @@ pte_t *highmem_virt_to_ptep(uint32_t addr) {
     }
 
     printk(KERN_INFO "debug: virt_to_ptep success, virt (%lx), *ptep %lx\n", addr, *ptep);
-    printk(KERN_INFO "debug:            pgd: %lx\n", pgdp);
-    printk(KERN_INFO "                  *pgd: %lx\n", *(pgdp));
+    // printk(KERN_INFO "debug:            pgd: %lx\n", pgdp);
+    // printk(KERN_INFO "                  *pgd: %lx\n", *(pgdp));
     // printk(KERN_INFO "debug:        ptep: %lx\n", ptep);
     // printk(KERN_INFO "debug:        pgdp: %lx\n", pgdp);
     // printk(KERN_INFO "debug:        *pgdp: %lx\n", *pgdp);
@@ -101,38 +145,6 @@ pte_t *highmem_virt_to_ptep(uint32_t addr) {
 
     return ptep;
 }
-
-pte_t *virt_to_ptep(uint32_t addr) {
-    init_init_mm_ptr();
-
-    // return internal_virt_to_kpte(addr);
-    return highmem_virt_to_ptep(addr);
-}
-
-
-void ptep_flip_write_protect(pte_t *ptep) {
-    if (!pte_write(*ptep)) {
-            printk(KERN_INFO "ptep_flip_write_protect: ptep %lx not writeable, flipping, *ptep %lx\n", ptep, *ptep);
-            set_pte_ext(ptep, pte_mkwrite(*ptep), 0);
-            printk(KERN_INFO "                         ptep %lx, *ptep %lx, pte_write(*ptep) %d\n", ptep, *ptep, pte_write(*ptep));
-    }
-    else {
-        printk(KERN_INFO "ptep_flip_write_protect: ptep %lx writeable, flipping\n", ptep);
-        set_pte_ext(ptep, pte_wrprotect(*ptep), 0);
-    }
-}
-
-static unsigned long highmem_pte_to_phys(pte_t *ptep) {
-    struct page *p = pte_page(*ptep);
-    return page_to_phys(p);
-}
-
-static unsigned long highmem_virt_to_phys(unsigned long addr) {
-    unsigned long off = addr & ~PAGE_MASK;
-    unsigned long r = highmem_pte_to_phys(virt_to_ptep(addr)) + off;
-    // printk(KERN_INFO "debug: highmem_virt_to_phys on addr %lx, off %lx -> %lx\n", addr, off, r);
-    return r;
-}
-
+*/
 
 #endif

@@ -5,7 +5,7 @@ LIBNAME = capstone
 
 
 all:
-	KCPPFLAGS="-O0" make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	KCPPFLAGS="-O0 -w" make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 	objdump -d tlbkit.ko > tlbkit.objdump
 
 clean:

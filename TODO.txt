@@ -63,3 +63,10 @@ TIME ALLOWING:
 
 next time:
 fix hypervisor with state saving + DISABLE SMP TO TEST !!
+
+6/19/24
+- refactor to use kernel API for pagetable manipulation, arm32 pagetables r fucked
+    - !! find article again !!
+        1. arm32 pagetable overview
+        2. article mentioning set_pte_ext sets fake pte
+- look into amd LFU cache evict, possibly EPT hook ?

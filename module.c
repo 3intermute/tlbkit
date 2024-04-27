@@ -94,7 +94,7 @@ void tlbkit_place_hook(uint32_t addr) {
     printk(KERN_INFO "                   addr_aligned: %lx\n", addr_aligned);
 
     // make reloc page writeable
-    ptep_flip_write_protect(virt_to_ptep(handler_entry));
+    pg_flip_write_protect(handler_entry);
     flush_cache_all();
     internal_flush_tlb_all();
 
@@ -102,7 +102,7 @@ void tlbkit_place_hook(uint32_t addr) {
     memcpy(__reloc0_handler_entry, addr, TLBKIT_HOOK_LENGTH);
     __ret_addr_handler_entry = addr + TLBKIT_HOOK_LENGTH;
 
-    ptep_flip_write_protect(virt_to_ptep(handler_entry));
+    pg_flip_write_protect(handler_entry);
     flush_cache_all();
     internal_flush_tlb_all();
 
@@ -127,11 +127,15 @@ void tlbkit_place_hook(uint32_t addr) {
 
     pte_t *__ptep_orig_pg;
     if (internal_is_vmalloc_or_module_addr(addr_aligned)) {
-        __ptep_orig_pg = virt_to_ptep(addr_aligned); // highmem
+        // __ptep_orig_pg = virt_to_ptep(addr_aligned); // highmem
+
+
     }
     else {
-        __ptep_orig_pg = virt_to_ptep(addr_aligned); // check if this works for lowmem..
+        // __ptep_orig_pg = virt_to_ptep(addr_aligned); // check if this works for lowmem..
         // __ptep_orig_pg = internal_virt_to_kpte(addr_aligned); // low mem, virt_to_ptep COULD BE WRONG for lowmem ??
+
+
     }
     pte_t __pte_orig_pg = *__ptep_orig_pg;
     uint32_t __pa_orig_pg;
