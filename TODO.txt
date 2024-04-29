@@ -11,16 +11,10 @@ priority:
 - mov badca11, nop
 
 
-
-// r0 -> r1, passing addr through r0, ordering may be fucked
-
-
 TODO transcribed 4/13/24:
 - test with -O0 compiler flag, is angr being overzealous ?
 - test with not replacing pgtable after swap
 - FIX ASID issue, mark page as global
-
-
 
 
 
@@ -30,3 +24,15 @@ code 0x80f is the write protect violation code
 check:
 - page alignment on page to ptep ?
 - write protect bit flip code correct ?
+
+
+
+4/25/24:
+- intra dms, inline data so we can do a ldr into pc without clobbering a reg, no need to be within 32MB
+```
+    b end
+start:
+    0xdeadbeef @addr
+end:
+    ldr pc =start
+```

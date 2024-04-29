@@ -12,7 +12,7 @@
 #include <asm/ptrace.h>         // struct pt_regs
 
 
-#include <asm/cacheflush.h>     // flush_cache_mm
+#include <asm/cacheflush.h>     // flush_cache_all
 // #include <asm/tlbflush.h>    // flush_tlb_all NOT EXPORTED
 
 
@@ -30,7 +30,7 @@ MODULE_VERSION("0.1");
 
 
 
-extern int tlbkit_bad(void);
+extern int tlbkit_bad(uint32_t r0);
 
 
 extern uint32_t tlbkit_read_itlb_lockdown(void);
@@ -69,9 +69,11 @@ void *internal_memcpy(void *dest, void *src, size_t n) {
 }
 
 
-// void tlbkit_hook_handler_1(struct pt_regs *regs) {
-void tlbkit_hook_handler_1(void) {
-    printk(KERN_INFO "tlbkit: LETS FUCKING GOOOOO\n");
+void tlbkit_hook_handler_1(struct pt_regs *regs) {
+// void tlbkit_hook_handler_1(void) {
+    printk(KERN_INFO "tlbkit: HOOK HANDLER\n");
+    printk(KERN_INFO "          regs->r0: %lx\n", regs->uregs[0]);
+    printk(KERN_INFO "          regs->lr: %lx\n", regs->uregs[14]);
 
     return;
 }
@@ -136,14 +138,20 @@ static int __init tlbkit_init(void)
 
     // run read/execute tests pre-hook insertion
     printk(KERN_INFO "tlbkit: PRE-HOOK\n");
-    printk(KERN_INFO "          `tlbkit_bad()` returns %d\n", tlbkit_bad());
+    printk(KERN_INFO "          `tlbkit_bad()` returns %d\n", tlbkit_bad(333));
     printk(KERN_INFO "          `tlbkit_bad()` read returns %lx\n", *((uint32_t *) tlbkit_bad));
 
 
     // TODO: COPY PAGE FIRST TO NOT TAMPER WITH ORIGINAL PAGE
     tlbkit_place_highmem_hook(tlbkit_bad);
     printk(KERN_INFO "tlbkit: POST-HOOK\n");
-    printk(KERN_INFO "          `tlbkit_bad()` returns %d\n", tlbkit_bad());
+    printk(KERN_INFO "          `tlbkit_bad()` returns %d\n", tlbkit_bad(333));
+    printk(KERN_INFO "          `tlbkit_bad()` read returns %lx\n", *((uint32_t *) tlbkit_bad));
+
+    printk(KERN_INFO "tlbkit: flushing cache + tlb again, ensure prefetch buffer is flushed\n");
+    flush_cache_all();
+    tlbkit_flush_tlb_all();
+    printk(KERN_INFO "          `tlbkit_bad()` returns %d\n", tlbkit_bad(333));
     printk(KERN_INFO "          `tlbkit_bad()` read returns %lx\n", *((uint32_t *) tlbkit_bad));
 
     return 0;

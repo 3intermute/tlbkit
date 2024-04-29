@@ -60,15 +60,19 @@ SYM_FUNC_END(tlbkit_lockdown_itlb_addr)
 SYM_FUNC_START(tlbkit_handler_dispatch)
     @@@ TODO: ? alloc + copy context
     @@@       https://elixir.bootlin.com/linux/latest/source/arch/arm/kernel/entry-armv.S#L97
-    @ sub     sp, sp, #PT_REGS_SIZE
+    sub         sp, sp, #PT_REGS_SIZE
+    stmia	    sp,     {r0 - lr}
 
     @@@ call tlbkit_hook_handler_1
-    push {lr}
+    @ push {lr}
+    mov      r0, sp
     bl       tlbkit_hook_handler_1
 
     @@@ TODO: ? restore context, restore stack ?
-    pop {lr}
-.globl tlbkit_handler_dispatch_reloc
+    @ pop {lr}
+    ldmia       sp, {r0 - lr}
+    add         sp, sp, #PT_REGS_SIZE
+    .globl tlbkit_handler_dispatch_reloc
 tlbkit_handler_dispatch_reloc:
 @ TODO: !! we can make this only a relative branch as it will copied to lowmem, !! define offsets constants
     nop @ mov r0, 222,      overwritten by b  tlbkit_handler_dispatch, 32MB pc relative
@@ -78,7 +82,7 @@ tlbkit_handler_dispatch_reloc:
 tlbkit_handler_dispatch_reloc_a:
     @ TODO: !! copy this to lowmem so we can do this shit in 1 inst for kernel text,
     @          - this is fine for now bc tlbkit_bad is within highmem
-    nop      @ mov pc, pc -tlbkit_handler_dispatch_reloc_a + addr + ARM_INST_WIDTH
+    nop      @ b -tlbkit_handler_dispatch_reloc_a + addr + ARM_INST_WIDTH
 SYM_FUNC_END(tlbkit_handler_dispatch)
 .align 12
 
