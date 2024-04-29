@@ -5,7 +5,7 @@
 #include <linux/delay.h>
 
 #define ARM_INST_WIDTH             4
-#define ARM_MOV32_N_INST           2
+#define ARM_MOV32_LENGTH           (2 * ARM_INST_WIDTH)
 
 // arm32
 uint32_t assemble_movw(uint32_t imm16, uint32_t rd) {
@@ -36,6 +36,16 @@ uint32_t assemble_b(uint32_t imm24) {
     printk(KERN_INFO "debug: imm24 %ld, mov pc, pc + imm24 -> %lx\n", _imm24, (0xea000000 | imm24));
     return 0xea000000 | imm24;
 }
+
+// new branch pattern, no clobbering regs
+// probably wont work due to ldr rather than purely inst fetch
+/*
+    b end
+start:
+    0xdeadbeef @addr
+end:
+    ldr pc =start
+*/
 
 
 

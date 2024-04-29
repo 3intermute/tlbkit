@@ -29,10 +29,25 @@ check:
 
 4/25/24:
 - intra dms, inline data so we can do a ldr into pc without clobbering a reg, no need to be within 32MB
+
 ```
     b end
 start:
     0xdeadbeef @addr
 end:
     ldr pc =start
+```
+
+4/28/24:
+shellcode:
+```
+push {r0}
+mov32 r0, __handler_dispatch abs
+bx r0
+
+pop {r0}
+..
+sub         sp, sp, #PT_REGS_SIZE
+stmia	    sp,     {r0 - lr}
+
 ```

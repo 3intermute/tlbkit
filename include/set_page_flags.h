@@ -18,7 +18,7 @@ static void init_init_mm_ptr(void) {
 pte_t *virt_to_ptep(uint32_t addr) {
     init_init_mm_ptr();
 
-    addr = (addr >> PAGE_SHIFT) << PAGE_SHIFT;
+    addr &= PAGE_MASK; // TODO: do in 1 inst via PAGE_MASK
 
     pgd_t *pgdp;
     p4d_t *p4dp;
@@ -64,10 +64,10 @@ pte_t *virt_to_ptep(uint32_t addr) {
     }
 
     printk(KERN_INFO "debug: virt_to_ptep success, virt (%lx), *ptep %lx\n", addr, *ptep);
-    printk(KERN_INFO "debug:        ptep: %lx\n", ptep);
-    printk(KERN_INFO "debug:        pgdp: %lx\n", pgdp);
-    printk(KERN_INFO "debug:        *pgdp: %lx\n", *pgdp);
-    printk(KERN_INFO "----\n");
+    // printk(KERN_INFO "debug:        ptep: %lx\n", ptep);
+    // printk(KERN_INFO "debug:        pgdp: %lx\n", pgdp);
+    // printk(KERN_INFO "debug:        *pgdp: %lx\n", *pgdp);
+    // printk(KERN_INFO "----\n");
 
     return ptep;
 }

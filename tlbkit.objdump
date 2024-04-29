@@ -5,193 +5,261 @@ tlbkit.ko:     file format elf32-littlearm
 Disassembly of section .text:
 
 00000000 <rk_kallsyms_lookup_name.part.0>:
-   0:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-   4:	e3004000 	movw	r4, #0
-   8:	e3404000 	movt	r4, #0
-   c:	e1a05000 	mov	r5, r0
-  10:	e5942000 	ldr	r2, [r4]
-  14:	e3520000 	cmp	r2, #0
-  18:	0a000009 	beq	44 <rk_kallsyms_lookup_name.part.0+0x44>
-  1c:	e1a00005 	mov	r0, r5
-  20:	e12fff32 	blx	r2
-  24:	e1a01005 	mov	r1, r5
-  28:	e1a04000 	mov	r4, r0
-  2c:	e1a02000 	mov	r2, r0
-  30:	e3000000 	movw	r0, #0
-  34:	e3400000 	movt	r0, #0
-  38:	ebfffffe 	bl	0 <printk>
-  3c:	e1a00004 	mov	r0, r4
-  40:	e8bd81f0 	pop	{r4, r5, r6, r7, r8, pc}
-  44:	e2840004 	add	r0, r4, #4
-  48:	e3007000 	movw	r7, #0
-  4c:	e3407000 	movt	r7, #0
-  50:	e584701c 	str	r7, [r4, #28]
-  54:	ebfffffe 	bl	0 <register_kprobe>
-  58:	e3500000 	cmp	r0, #0
-  5c:	ba00000a 	blt	8c <rk_kallsyms_lookup_name.part.0+0x8c>
-  60:	e5946018 	ldr	r6, [r4, #24]
-  64:	e2840004 	add	r0, r4, #4
-  68:	ebfffffe 	bl	0 <unregister_kprobe>
-  6c:	e3000000 	movw	r0, #0
-  70:	e3400000 	movt	r0, #0
-  74:	e1a02006 	mov	r2, r6
-  78:	e1a01007 	mov	r1, r7
-  7c:	ebfffffe 	bl	0 <printk>
-  80:	e1a02006 	mov	r2, r6
-  84:	e5846000 	str	r6, [r4]
-  88:	eaffffe3 	b	1c <rk_kallsyms_lookup_name.part.0+0x1c>
-  8c:	e1a01007 	mov	r1, r7
-  90:	e3000000 	movw	r0, #0
-  94:	e3400000 	movt	r0, #0
-  98:	e3e06001 	mvn	r6, #1
-  9c:	ebfffffe 	bl	0 <printk>
-  a0:	eafffff6 	b	80 <rk_kallsyms_lookup_name.part.0+0x80>
+       0:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+       4:	e3004000 	movw	r4, #0
+       8:	e3404000 	movt	r4, #0
+       c:	e1a05000 	mov	r5, r0
+      10:	e5942000 	ldr	r2, [r4]
+      14:	e3520000 	cmp	r2, #0
+      18:	0a000009 	beq	44 <rk_kallsyms_lookup_name.part.0+0x44>
+      1c:	e1a00005 	mov	r0, r5
+      20:	e12fff32 	blx	r2
+      24:	e1a01005 	mov	r1, r5
+      28:	e1a04000 	mov	r4, r0
+      2c:	e1a02000 	mov	r2, r0
+      30:	e3000000 	movw	r0, #0
+      34:	e3400000 	movt	r0, #0
+      38:	ebfffffe 	bl	0 <printk>
+      3c:	e1a00004 	mov	r0, r4
+      40:	e8bd81f0 	pop	{r4, r5, r6, r7, r8, pc}
+      44:	e2840004 	add	r0, r4, #4
+      48:	e3007000 	movw	r7, #0
+      4c:	e3407000 	movt	r7, #0
+      50:	e584701c 	str	r7, [r4, #28]
+      54:	ebfffffe 	bl	0 <register_kprobe>
+      58:	e3500000 	cmp	r0, #0
+      5c:	ba00000a 	blt	8c <rk_kallsyms_lookup_name.part.0+0x8c>
+      60:	e5946018 	ldr	r6, [r4, #24]
+      64:	e2840004 	add	r0, r4, #4
+      68:	ebfffffe 	bl	0 <unregister_kprobe>
+      6c:	e3000000 	movw	r0, #0
+      70:	e3400000 	movt	r0, #0
+      74:	e1a02006 	mov	r2, r6
+      78:	e1a01007 	mov	r1, r7
+      7c:	ebfffffe 	bl	0 <printk>
+      80:	e1a02006 	mov	r2, r6
+      84:	e5846000 	str	r6, [r4]
+      88:	eaffffe3 	b	1c <rk_kallsyms_lookup_name.part.0+0x1c>
+      8c:	e1a01007 	mov	r1, r7
+      90:	e3000000 	movw	r0, #0
+      94:	e3400000 	movt	r0, #0
+      98:	e3e06001 	mvn	r6, #1
+      9c:	ebfffffe 	bl	0 <printk>
+      a0:	eafffff6 	b	80 <rk_kallsyms_lookup_name.part.0+0x80>
 
 000000a4 <assemble_movw>:
-  a4:	e1a01601 	lsl	r1, r1, #12
-  a8:	e7eb2050 	ubfx	r2, r0, #0, #12
-  ac:	e1a03200 	lsl	r3, r0, #4
-  b0:	e6ff0071 	uxth	r0, r1
-  b4:	e203380f 	and	r3, r3, #983040	@ 0xf0000
-  b8:	e1800002 	orr	r0, r0, r2
-  bc:	e1800003 	orr	r0, r0, r3
-  c0:	e38004e3 	orr	r0, r0, #-486539264	@ 0xe3000000
-  c4:	e12fff1e 	bx	lr
+      a4:	e1a01601 	lsl	r1, r1, #12
+      a8:	e7eb2050 	ubfx	r2, r0, #0, #12
+      ac:	e1a03200 	lsl	r3, r0, #4
+      b0:	e6ff0071 	uxth	r0, r1
+      b4:	e203380f 	and	r3, r3, #983040	@ 0xf0000
+      b8:	e1800002 	orr	r0, r0, r2
+      bc:	e1800003 	orr	r0, r0, r3
+      c0:	e38004e3 	orr	r0, r0, #-486539264	@ 0xe3000000
+      c4:	e12fff1e 	bx	lr
 
 000000c8 <assemble_movt>:
-  c8:	e1a01601 	lsl	r1, r1, #12
-  cc:	e7eb2050 	ubfx	r2, r0, #0, #12
-  d0:	e1a03200 	lsl	r3, r0, #4
-  d4:	e6ff0071 	uxth	r0, r1
-  d8:	e203380f 	and	r3, r3, #983040	@ 0xf0000
-  dc:	e1800002 	orr	r0, r0, r2
-  e0:	e1800003 	orr	r0, r0, r3
-  e4:	e38004e3 	orr	r0, r0, #-486539264	@ 0xe3000000
-  e8:	e3800501 	orr	r0, r0, #4194304	@ 0x400000
-  ec:	e12fff1e 	bx	lr
+      c8:	e1a01601 	lsl	r1, r1, #12
+      cc:	e7eb2050 	ubfx	r2, r0, #0, #12
+      d0:	e1a03200 	lsl	r3, r0, #4
+      d4:	e6ff0071 	uxth	r0, r1
+      d8:	e203380f 	and	r3, r3, #983040	@ 0xf0000
+      dc:	e1800002 	orr	r0, r0, r2
+      e0:	e1800003 	orr	r0, r0, r3
+      e4:	e38004e3 	orr	r0, r0, #-486539264	@ 0xe3000000
+      e8:	e3800501 	orr	r0, r0, #4194304	@ 0x400000
+      ec:	e12fff1e 	bx	lr
 
 000000f0 <assemble_mov32>:
-  f0:	e1a0c601 	lsl	ip, r1, #12
-  f4:	e7eb3050 	ubfx	r3, r0, #0, #12
-  f8:	e1a01200 	lsl	r1, r0, #4
-  fc:	e1a00820 	lsr	r0, r0, #16
- 100:	e6ffc07c 	uxth	ip, ip
- 104:	e201180f 	and	r1, r1, #983040	@ 0xf0000
- 108:	e183300c 	orr	r3, r3, ip
- 10c:	e1811003 	orr	r1, r1, r3
- 110:	e1a03200 	lsl	r3, r0, #4
- 114:	e203380f 	and	r3, r3, #983040	@ 0xf0000
- 118:	e7eb0050 	ubfx	r0, r0, #0, #12
- 11c:	e183300c 	orr	r3, r3, ip
- 120:	e38114e3 	orr	r1, r1, #-486539264	@ 0xe3000000
- 124:	e1833000 	orr	r3, r3, r0
- 128:	e5821000 	str	r1, [r2]
- 12c:	e38334e3 	orr	r3, r3, #-486539264	@ 0xe3000000
- 130:	e3833501 	orr	r3, r3, #4194304	@ 0x400000
- 134:	e5823004 	str	r3, [r2, #4]
- 138:	e12fff1e 	bx	lr
+      f0:	e1a0c601 	lsl	ip, r1, #12
+      f4:	e7eb3050 	ubfx	r3, r0, #0, #12
+      f8:	e1a01200 	lsl	r1, r0, #4
+      fc:	e1a00820 	lsr	r0, r0, #16
+     100:	e6ffc07c 	uxth	ip, ip
+     104:	e201180f 	and	r1, r1, #983040	@ 0xf0000
+     108:	e183300c 	orr	r3, r3, ip
+     10c:	e1811003 	orr	r1, r1, r3
+     110:	e1a03200 	lsl	r3, r0, #4
+     114:	e203380f 	and	r3, r3, #983040	@ 0xf0000
+     118:	e7eb0050 	ubfx	r0, r0, #0, #12
+     11c:	e183300c 	orr	r3, r3, ip
+     120:	e38114e3 	orr	r1, r1, #-486539264	@ 0xe3000000
+     124:	e1833000 	orr	r3, r3, r0
+     128:	e5821000 	str	r1, [r2]
+     12c:	e38334e3 	orr	r3, r3, #-486539264	@ 0xe3000000
+     130:	e3833501 	orr	r3, r3, #4194304	@ 0x400000
+     134:	e5823004 	str	r3, [r2, #4]
+     138:	e12fff1e 	bx	lr
 
 0000013c <rk_kprobe_get_func_addr>:
- 13c:	e92d4070 	push	{r4, r5, r6, lr}
- 140:	e2505000 	subs	r5, r0, #0
- 144:	1a000002 	bne	154 <rk_kprobe_get_func_addr+0x18>
- 148:	e3e04001 	mvn	r4, #1
- 14c:	e1a00004 	mov	r0, r4
- 150:	e8bd8070 	pop	{r4, r5, r6, pc}
- 154:	e3004000 	movw	r4, #0
- 158:	e3404000 	movt	r4, #0
- 15c:	e2840004 	add	r0, r4, #4
- 160:	e584501c 	str	r5, [r4, #28]
- 164:	ebfffffe 	bl	0 <register_kprobe>
- 168:	e3500000 	cmp	r0, #0
- 16c:	ba000008 	blt	194 <rk_kprobe_get_func_addr+0x58>
- 170:	e2840004 	add	r0, r4, #4
- 174:	e5944018 	ldr	r4, [r4, #24]
- 178:	ebfffffe 	bl	0 <unregister_kprobe>
- 17c:	e1a01005 	mov	r1, r5
- 180:	e1a02004 	mov	r2, r4
- 184:	e3000000 	movw	r0, #0
- 188:	e3400000 	movt	r0, #0
- 18c:	ebfffffe 	bl	0 <printk>
- 190:	eaffffed 	b	14c <rk_kprobe_get_func_addr+0x10>
- 194:	e1a01005 	mov	r1, r5
- 198:	e3000000 	movw	r0, #0
- 19c:	e3400000 	movt	r0, #0
- 1a0:	ebfffffe 	bl	0 <printk>
- 1a4:	eaffffe7 	b	148 <rk_kprobe_get_func_addr+0xc>
+     13c:	e92d4070 	push	{r4, r5, r6, lr}
+     140:	e2505000 	subs	r5, r0, #0
+     144:	1a000002 	bne	154 <rk_kprobe_get_func_addr+0x18>
+     148:	e3e04001 	mvn	r4, #1
+     14c:	e1a00004 	mov	r0, r4
+     150:	e8bd8070 	pop	{r4, r5, r6, pc}
+     154:	e3004000 	movw	r4, #0
+     158:	e3404000 	movt	r4, #0
+     15c:	e2840004 	add	r0, r4, #4
+     160:	e584501c 	str	r5, [r4, #28]
+     164:	ebfffffe 	bl	0 <register_kprobe>
+     168:	e3500000 	cmp	r0, #0
+     16c:	ba000008 	blt	194 <rk_kprobe_get_func_addr+0x58>
+     170:	e2840004 	add	r0, r4, #4
+     174:	e5944018 	ldr	r4, [r4, #24]
+     178:	ebfffffe 	bl	0 <unregister_kprobe>
+     17c:	e1a01005 	mov	r1, r5
+     180:	e1a02004 	mov	r2, r4
+     184:	e3000000 	movw	r0, #0
+     188:	e3400000 	movt	r0, #0
+     18c:	ebfffffe 	bl	0 <printk>
+     190:	eaffffed 	b	14c <rk_kprobe_get_func_addr+0x10>
+     194:	e1a01005 	mov	r1, r5
+     198:	e3000000 	movw	r0, #0
+     19c:	e3400000 	movt	r0, #0
+     1a0:	ebfffffe 	bl	0 <printk>
+     1a4:	eaffffe7 	b	148 <rk_kprobe_get_func_addr+0xc>
 
 000001a8 <rk_kallsyms_lookup_name>:
- 1a8:	e3500000 	cmp	r0, #0
- 1ac:	1a000001 	bne	1b8 <rk_kallsyms_lookup_name+0x10>
- 1b0:	e3e00001 	mvn	r0, #1
- 1b4:	e12fff1e 	bx	lr
- 1b8:	eaffff90 	b	0 <rk_kallsyms_lookup_name.part.0>
+     1a8:	e3500000 	cmp	r0, #0
+     1ac:	1a000001 	bne	1b8 <rk_kallsyms_lookup_name+0x10>
+     1b0:	e3e00001 	mvn	r0, #1
+     1b4:	e12fff1e 	bx	lr
+     1b8:	eaffff90 	b	0 <rk_kallsyms_lookup_name.part.0>
 
 000001bc <virt_to_ptep>:
- 1bc:	e92d4070 	push	{r4, r5, r6, lr}
- 1c0:	e3005000 	movw	r5, #0
- 1c4:	e3405000 	movt	r5, #0
- 1c8:	e1a04000 	mov	r4, r0
- 1cc:	e5950058 	ldr	r0, [r5, #88]	@ 0x58
- 1d0:	e3500000 	cmp	r0, #0
- 1d4:	0a000010 	beq	21c <virt_to_ptep+0x60>
- 1d8:	e3a03a0f 	mov	r3, #61440	@ 0xf000
- 1dc:	e34f3fff 	movt	r3, #65535	@ 0xffff
- 1e0:	e0041003 	and	r1, r4, r3
- 1e4:	e5902024 	ldr	r2, [r0, #36]	@ 0x24
- 1e8:	e1a00aa1 	lsr	r0, r1, #21
- 1ec:	e0825180 	add	r5, r2, r0, lsl #3
- 1f0:	e7920180 	ldr	r0, [r2, r0, lsl #3]
- 1f4:	e3500000 	cmp	r0, #0
- 1f8:	01a04000 	moveq	r4, r0
- 1fc:	0a000004 	beq	214 <virt_to_ptep+0x58>
- 200:	e7e82651 	ubfx	r2, r1, #12, #9
- 204:	e0000003 	and	r0, r0, r3
- 208:	e2403481 	sub	r3, r0, #-2130706432	@ 0x81000000
- 20c:	e0934102 	adds	r4, r3, r2, lsl #2
- 210:	1a000008 	bne	238 <virt_to_ptep+0x7c>
- 214:	e1a00004 	mov	r0, r4
- 218:	e8bd8070 	pop	{r4, r5, r6, pc}
- 21c:	e3000000 	movw	r0, #0
- 220:	e3400000 	movt	r0, #0
- 224:	ebffff75 	bl	0 <rk_kallsyms_lookup_name.part.0>
- 228:	e585005c 	str	r0, [r5, #92]	@ 0x5c
- 22c:	e12fff30 	blx	r0
- 230:	e5850058 	str	r0, [r5, #88]	@ 0x58
- 234:	eaffffe7 	b	1d8 <virt_to_ptep+0x1c>
- 238:	e7932102 	ldr	r2, [r3, r2, lsl #2]
- 23c:	e3000000 	movw	r0, #0
- 240:	e3400000 	movt	r0, #0
- 244:	ebfffffe 	bl	0 <printk>
- 248:	e1a01004 	mov	r1, r4
- 24c:	e3000000 	movw	r0, #0
- 250:	e3400000 	movt	r0, #0
- 254:	ebfffffe 	bl	0 <printk>
- 258:	e1a01005 	mov	r1, r5
- 25c:	e3000000 	movw	r0, #0
- 260:	e3400000 	movt	r0, #0
- 264:	ebfffffe 	bl	0 <printk>
- 268:	e1a01005 	mov	r1, r5
- 26c:	e3000000 	movw	r0, #0
- 270:	e3400000 	movt	r0, #0
- 274:	ebfffffe 	bl	0 <printk>
- 278:	e3000000 	movw	r0, #0
- 27c:	e3400000 	movt	r0, #0
- 280:	ebfffffe 	bl	0 <printk>
- 284:	eaffffe2 	b	214 <virt_to_ptep+0x58>
+     1bc:	e92d4070 	push	{r4, r5, r6, lr}
+     1c0:	e3005000 	movw	r5, #0
+     1c4:	e3405000 	movt	r5, #0
+     1c8:	e1a04000 	mov	r4, r0
+     1cc:	e5950058 	ldr	r0, [r5, #88]	@ 0x58
+     1d0:	e3500000 	cmp	r0, #0
+     1d4:	0a00000f 	beq	218 <virt_to_ptep+0x5c>
+     1d8:	e3a03a0f 	mov	r3, #61440	@ 0xf000
+     1dc:	e34f3fff 	movt	r3, #65535	@ 0xffff
+     1e0:	e0041003 	and	r1, r4, r3
+     1e4:	e5902024 	ldr	r2, [r0, #36]	@ 0x24
+     1e8:	e1a00aa1 	lsr	r0, r1, #21
+     1ec:	e7920180 	ldr	r0, [r2, r0, lsl #3]
+     1f0:	e3500000 	cmp	r0, #0
+     1f4:	01a04000 	moveq	r4, r0
+     1f8:	0a000004 	beq	210 <virt_to_ptep+0x54>
+     1fc:	e7e82651 	ubfx	r2, r1, #12, #9
+     200:	e0000003 	and	r0, r0, r3
+     204:	e2403481 	sub	r3, r0, #-2130706432	@ 0x81000000
+     208:	e0934102 	adds	r4, r3, r2, lsl #2
+     20c:	1a000008 	bne	234 <virt_to_ptep+0x78>
+     210:	e1a00004 	mov	r0, r4
+     214:	e8bd8070 	pop	{r4, r5, r6, pc}
+     218:	e3000000 	movw	r0, #0
+     21c:	e3400000 	movt	r0, #0
+     220:	ebffff76 	bl	0 <rk_kallsyms_lookup_name.part.0>
+     224:	e585005c 	str	r0, [r5, #92]	@ 0x5c
+     228:	e12fff30 	blx	r0
+     22c:	e5850058 	str	r0, [r5, #88]	@ 0x58
+     230:	eaffffe8 	b	1d8 <virt_to_ptep+0x1c>
+     234:	e7932102 	ldr	r2, [r3, r2, lsl #2]
+     238:	e3000000 	movw	r0, #0
+     23c:	e3400000 	movt	r0, #0
+     240:	ebfffffe 	bl	0 <printk>
+     244:	eafffff1 	b	210 <virt_to_ptep+0x54>
 
-00000288 <internal_memcpy>:
- 288:	e3520000 	cmp	r2, #0
- 28c:	012fff1e 	bxeq	lr
- 290:	e2422001 	sub	r2, r2, #1
- 294:	e2413001 	sub	r3, r1, #1
- 298:	e240c001 	sub	ip, r0, #1
- 29c:	e0811002 	add	r1, r1, r2
- 2a0:	e5f32001 	ldrb	r2, [r3, #1]!
- 2a4:	e5ec2001 	strb	r2, [ip, #1]!
- 2a8:	e1530001 	cmp	r3, r1
- 2ac:	1afffffb 	bne	2a0 <internal_memcpy+0x18>
- 2b0:	e12fff1e 	bx	lr
+00000248 <internal_memcpy>:
+     248:	e3520000 	cmp	r2, #0
+     24c:	012fff1e 	bxeq	lr
+     250:	e2422001 	sub	r2, r2, #1
+     254:	e2413001 	sub	r3, r1, #1
+     258:	e240c001 	sub	ip, r0, #1
+     25c:	e0811002 	add	r1, r1, r2
+     260:	e5f32001 	ldrb	r2, [r3, #1]!
+     264:	e5ec2001 	strb	r2, [ip, #1]!
+     268:	e1530001 	cmp	r3, r1
+     26c:	1afffffb 	bne	260 <internal_memcpy+0x18>
+     270:	e12fff1e 	bx	lr
+	...
+
+00001000 <tlbkit_bad>:
+    1000:	e3a000de 	mov	r0, #222	@ 0xde
+    1004:	e1a0f00e 	mov	pc, lr
+    1008:	e320f000 	nop	{0}
+    100c:	e320f000 	nop	{0}
+    1010:	e320f000 	nop	{0}
+    1014:	e320f000 	nop	{0}
+    1018:	e320f000 	nop	{0}
+    101c:	e320f000 	nop	{0}
+    1020:	e320f000 	nop	{0}
+    1024:	e320f000 	nop	{0}
+    1028:	e320f000 	nop	{0}
+    102c:	e320f000 	nop	{0}
+    1030:	e320f000 	nop	{0}
+    1034:	e320f000 	nop	{0}
+    1038:	e320f000 	nop	{0}
+    103c:	e320f000 	nop	{0}
+	...
+
+00002000 <tlbkit_read_itlb_lockdown>:
+    2000:	ee1a0f30 	mrc	15, 0, r0, cr10, cr0, {1}
+    2004:	e1a0f00e 	mov	pc, lr
+
+00002008 <tlbkit_get_asid>:
+    2008:	ee1d0f30 	mrc	15, 0, r0, cr13, cr0, {1}
+    200c:	e1a0f00e 	mov	pc, lr
+
+00002010 <tlbkit_read_c1>:
+    2010:	ee110f51 	mrc	15, 0, r0, cr1, cr1, {2}
+    2014:	e1a0f00e 	mov	pc, lr
+
+00002018 <tlbkit_lockdown_itlb_addr>:
+    2018:	f57ff04f 	dsb	sy
+    201c:	e1a01000 	mov	r1, r0
+    2020:	ee081f35 	mcr	15, 0, r1, cr8, cr5, {1}
+    2024:	e3a00001 	mov	r0, #1
+    2028:	e3a02521 	mov	r2, #138412032	@ 0x8400000
+    202c:	ee0a0f30 	mcr	15, 0, r0, cr10, cr0, {1}
+    2030:	ee0a1f31 	mcr	15, 0, r1, cr10, cr1, {1}
+    2034:	ee0a2f30 	mcr	15, 0, r2, cr10, cr0, {1}
+    2038:	f57ff04f 	dsb	sy
+    203c:	f57ff06f 	isb	sy
+    2040:	e1a0f00e 	mov	pc, lr
+    2044:	e320f000 	nop	{0}
+    2048:	e320f000 	nop	{0}
+    204c:	e320f000 	nop	{0}
+    2050:	e320f000 	nop	{0}
+    2054:	e320f000 	nop	{0}
+    2058:	e320f000 	nop	{0}
+    205c:	e320f000 	nop	{0}
+    2060:	e320f000 	nop	{0}
+    2064:	e320f000 	nop	{0}
+    2068:	e320f000 	nop	{0}
+    206c:	e320f000 	nop	{0}
+    2070:	e320f000 	nop	{0}
+    2074:	e320f000 	nop	{0}
+    2078:	e320f000 	nop	{0}
+    207c:	e320f000 	nop	{0}
+	...
+
+00003000 <handler_entry>:
+    3000:	e49d0004 	pop	{r0}		@ (ldr r0, [sp], #4)
+    3004:	e24dd048 	sub	sp, sp, #72	@ 0x48
+    3008:	e88d7fff 	stm	sp, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, sp, lr}
+    300c:	e1a0000d 	mov	r0, sp
+    3010:	ebfffffe 	bl	b8 <assemble_movw+0x14>
+    3014:	e89d7fff 	ldm	sp, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, sp, lr}
+    3018:	e28dd048 	add	sp, sp, #72	@ 0x48
+
+0000301c <__reloc0_handler_entry>:
+    301c:	e320f000 	nop	{0}
+    3020:	e320f000 	nop	{0}
+    3024:	e320f000 	nop	{0}
+    3028:	e320f000 	nop	{0}
+    302c:	e51ff004 	ldr	pc, [pc, #-4]	@ 3030 <__ret_addr_handler_entry>
+
+00003030 <__ret_addr_handler_entry>:
+    3030:	00000000 	.word	0x00000000
+    3034:	e320f000 	nop	{0}
+    3038:	e320f000 	nop	{0}
+    303c:	e320f000 	nop	{0}
+	...
 
 Disassembly of section .text.unlikely:
 
@@ -208,309 +276,333 @@ Disassembly of section .text.unlikely:
   24:	e1a00004 	mov	r0, r4
   28:	e8bd8010 	pop	{r4, pc}
 
-0000002c <highmem_virt_to_phys>:
-  2c:	e92d4010 	push	{r4, lr}
-  30:	e1a04000 	mov	r4, r0
-  34:	ebfffffe 	bl	1bc <tlbkit_place_highmem_hook+0x88>
-  38:	e3002000 	movw	r2, #0
-  3c:	e3402000 	movt	r2, #0
-  40:	e5903000 	ldr	r3, [r0]
-  44:	e3a0c024 	mov	ip, #36	@ 0x24
-  48:	e3081e39 	movw	r1, #36409	@ 0x8e39
-  4c:	e34318e3 	movt	r1, #14563	@ 0x38e3
-  50:	e5920000 	ldr	r0, [r2]
-  54:	e7eb4054 	ubfx	r4, r4, #0, #12
-  58:	e0603623 	rsb	r3, r0, r3, lsr #12
-  5c:	e003039c 	mul	r3, ip, r3
-  60:	e1a03143 	asr	r3, r3, #2
-  64:	e0200391 	mla	r0, r1, r3, r0
-  68:	e0840600 	add	r0, r4, r0, lsl #12
-  6c:	e8bd8010 	pop	{r4, pc}
-
-00000070 <ptep_flip_write_protect>:
-  70:	e92d4070 	push	{r4, r5, r6, lr}
-  74:	e1a01000 	mov	r1, r0
-  78:	e3005000 	movw	r5, #0
-  7c:	e3405000 	movt	r5, #0
-  80:	e5902000 	ldr	r2, [r0]
-  84:	e1a04000 	mov	r4, r0
-  88:	e2126080 	ands	r6, r2, #128	@ 0x80
-  8c:	0a000010 	beq	d4 <ptep_flip_write_protect+0x64>
+0000002c <ptep_flip_write_protect>:
+  2c:	e92d4070 	push	{r4, r5, r6, lr}
+  30:	e1a01000 	mov	r1, r0
+  34:	e3005000 	movw	r5, #0
+  38:	e3405000 	movt	r5, #0
+  3c:	e5902000 	ldr	r2, [r0]
+  40:	e1a04000 	mov	r4, r0
+  44:	e2126080 	ands	r6, r2, #128	@ 0x80
+  48:	0a000010 	beq	90 <ptep_flip_write_protect+0x64>
+  4c:	e3000000 	movw	r0, #0
+  50:	e3400000 	movt	r0, #0
+  54:	ebfffffe 	bl	0 <printk>
+  58:	e5941000 	ldr	r1, [r4]
+  5c:	e5953024 	ldr	r3, [r5, #36]	@ 0x24
+  60:	e1a00004 	mov	r0, r4
+  64:	e3c11080 	bic	r1, r1, #128	@ 0x80
+  68:	e3a02000 	mov	r2, #0
+  6c:	e12fff33 	blx	r3
+  70:	e5942000 	ldr	r2, [r4]
+  74:	e1a01004 	mov	r1, r4
+  78:	e3000000 	movw	r0, #0
+  7c:	e3400000 	movt	r0, #0
+  80:	e2223080 	eor	r3, r2, #128	@ 0x80
+  84:	e8bd4070 	pop	{r4, r5, r6, lr}
+  88:	e7e033d3 	ubfx	r3, r3, #7, #1
+  8c:	eafffffe 	b	0 <printk>
   90:	e3000000 	movw	r0, #0
   94:	e3400000 	movt	r0, #0
   98:	ebfffffe 	bl	0 <printk>
   9c:	e5941000 	ldr	r1, [r4]
   a0:	e5953024 	ldr	r3, [r5, #36]	@ 0x24
-  a4:	e1a00004 	mov	r0, r4
-  a8:	e3c11080 	bic	r1, r1, #128	@ 0x80
-  ac:	e3a02000 	mov	r2, #0
-  b0:	e12fff33 	blx	r3
-  b4:	e5942000 	ldr	r2, [r4]
-  b8:	e1a01004 	mov	r1, r4
-  bc:	e3000000 	movw	r0, #0
-  c0:	e3400000 	movt	r0, #0
-  c4:	e2223080 	eor	r3, r2, #128	@ 0x80
-  c8:	e8bd4070 	pop	{r4, r5, r6, lr}
-  cc:	e7e033d3 	ubfx	r3, r3, #7, #1
-  d0:	eafffffe 	b	0 <printk>
-  d4:	e3000000 	movw	r0, #0
-  d8:	e3400000 	movt	r0, #0
-  dc:	ebfffffe 	bl	0 <printk>
-  e0:	e5941000 	ldr	r1, [r4]
-  e4:	e5953024 	ldr	r3, [r5, #36]	@ 0x24
-  e8:	e1a02006 	mov	r2, r6
-  ec:	e1a00004 	mov	r0, r4
-  f0:	e3811080 	orr	r1, r1, #128	@ 0x80
-  f4:	e8bd4070 	pop	{r4, r5, r6, lr}
-  f8:	e12fff13 	bx	r3
+  a4:	e1a02006 	mov	r2, r6
+  a8:	e1a00004 	mov	r0, r4
+  ac:	e3811080 	orr	r1, r1, #128	@ 0x80
+  b0:	e8bd4070 	pop	{r4, r5, r6, lr}
+  b4:	e12fff13 	bx	r3
 
-000000fc <tlbkit_hook_handler_1>:
-  fc:	e92d4010 	push	{r4, lr}
- 100:	e1a04000 	mov	r4, r0
- 104:	e3000000 	movw	r0, #0
- 108:	e3400000 	movt	r0, #0
- 10c:	ebfffffe 	bl	0 <printk>
- 110:	e5941000 	ldr	r1, [r4]
+000000b8 <tlbkit_hook_handler>:
+  b8:	e92d4010 	push	{r4, lr}
+  bc:	e1a04000 	mov	r4, r0
+  c0:	e3000000 	movw	r0, #0
+  c4:	e3400000 	movt	r0, #0
+  c8:	ebfffffe 	bl	0 <printk>
+  cc:	e5941000 	ldr	r1, [r4]
+  d0:	e3000000 	movw	r0, #0
+  d4:	e3400000 	movt	r0, #0
+  d8:	ebfffffe 	bl	0 <printk>
+  dc:	e5941038 	ldr	r1, [r4, #56]	@ 0x38
+  e0:	e3000000 	movw	r0, #0
+  e4:	e3400000 	movt	r0, #0
+  e8:	ebfffffe 	bl	0 <printk>
+  ec:	e3a0107b 	mov	r1, #123	@ 0x7b
+  f0:	e5841000 	str	r1, [r4]
+  f4:	e3000000 	movw	r0, #0
+  f8:	e3400000 	movt	r0, #0
+  fc:	e8bd4010 	pop	{r4, lr}
+ 100:	eafffffe 	b	0 <printk>
+
+00000104 <tlbkit_place_hook>:
+ 104:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 108:	e1a04000 	mov	r4, r0
+ 10c:	e1a01004 	mov	r1, r4
+ 110:	e24dd00c 	sub	sp, sp, #12
  114:	e3000000 	movw	r0, #0
  118:	e3400000 	movt	r0, #0
- 11c:	ebfffffe 	bl	0 <printk>
- 120:	e5941038 	ldr	r1, [r4, #56]	@ 0x38
- 124:	e3000000 	movw	r0, #0
- 128:	e3400000 	movt	r0, #0
- 12c:	e8bd4010 	pop	{r4, lr}
- 130:	eafffffe 	b	0 <printk>
-
-00000134 <tlbkit_place_highmem_hook>:
- 134:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 138:	e1a01000 	mov	r1, r0
- 13c:	e59f324c 	ldr	r3, [pc, #588]	@ 390 <tlbkit_place_highmem_hook+0x25c>
- 140:	e24dd00c 	sub	sp, sp, #12
- 144:	e1a04000 	mov	r4, r0
- 148:	e3008000 	movw	r8, #0
- 14c:	e3408000 	movt	r8, #0
- 150:	e3000000 	movw	r0, #0
- 154:	e3400000 	movt	r0, #0
- 158:	e5933000 	ldr	r3, [r3]
- 15c:	e58d3004 	str	r3, [sp, #4]
- 160:	e3a03000 	mov	r3, #0
- 164:	e3006000 	movw	r6, #0
- 168:	e3406000 	movt	r6, #0
- 16c:	ebfffffe 	bl	0 <printk>
- 170:	e1a00008 	mov	r0, r8
- 174:	ebfffffe 	bl	1bc <tlbkit_place_highmem_hook+0x88>
- 178:	ebfffffe 	bl	70 <ptep_flip_write_protect>
- 17c:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
- 180:	e5963060 	ldr	r3, [r6, #96]	@ 0x60
- 184:	e12fff33 	blx	r3
- 188:	e3a00a01 	mov	r0, #4096	@ 0x1000
- 18c:	ebfffffe 	bl	0 <vmalloc>
- 190:	e1a0a000 	mov	sl, r0
- 194:	ebffffa4 	bl	2c <highmem_virt_to_phys>
- 198:	e1a05000 	mov	r5, r0
- 19c:	e3a03000 	mov	r3, #0
- 1a0:	e7d42003 	ldrb	r2, [r4, r3]
- 1a4:	e7ca2003 	strb	r2, [sl, r3]
- 1a8:	e2833001 	add	r3, r3, #1
- 1ac:	e3530a01 	cmp	r3, #4096	@ 0x1000
- 1b0:	1afffffa 	bne	1a0 <tlbkit_place_highmem_hook+0x6c>
- 1b4:	e1a00004 	mov	r0, r4
- 1b8:	ebfffffe 	bl	1bc <tlbkit_place_highmem_hook+0x88>
- 1bc:	e1a07000 	mov	r7, r0
- 1c0:	e1a00004 	mov	r0, r4
- 1c4:	e5979000 	ldr	r9, [r7]
- 1c8:	ebffff97 	bl	2c <highmem_virt_to_phys>
- 1cc:	e1a0b000 	mov	fp, r0
- 1d0:	ebfffffe 	bl	1008 <tlbkit_get_asid>
- 1d4:	e1a01000 	mov	r1, r0
- 1d8:	e3000000 	movw	r0, #0
- 1dc:	e3400000 	movt	r0, #0
- 1e0:	ebfffffe 	bl	0 <printk>
- 1e4:	e1a0200b 	mov	r2, fp
- 1e8:	e1a01004 	mov	r1, r4
- 1ec:	e3000000 	movw	r0, #0
- 1f0:	e3400000 	movt	r0, #0
- 1f4:	ebfffffe 	bl	0 <printk>
- 1f8:	e1a02005 	mov	r2, r5
- 1fc:	e1a0100a 	mov	r1, sl
- 200:	e3000000 	movw	r0, #0
- 204:	e3400000 	movt	r0, #0
- 208:	ebfffffe 	bl	0 <printk>
- 20c:	e3a00001 	mov	r0, #1
- 210:	ebfffffe 	bl	0 <preempt_count_add>
- 214:	e3003000 	movw	r3, #0
- 218:	e3403000 	movt	r3, #0
- 21c:	e3c51eff 	bic	r1, r5, #4080	@ 0xff0
- 220:	e3005000 	movw	r5, #0
- 224:	e3405000 	movt	r5, #0
- 228:	e3c1100f 	bic	r1, r1, #15
- 22c:	e5933000 	ldr	r3, [r3]
- 230:	e3a02000 	mov	r2, #0
- 234:	e1a00007 	mov	r0, r7
- 238:	e1811003 	orr	r1, r1, r3
- 23c:	e5953024 	ldr	r3, [r5, #36]	@ 0x24
- 240:	e3c11080 	bic	r1, r1, #128	@ 0x80
- 244:	e12fff33 	blx	r3
- 248:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
- 24c:	e5963060 	ldr	r3, [r6, #96]	@ 0x60
- 250:	e12fff33 	blx	r3
- 254:	ebfffffe 	bl	1000 <tlbkit_read_itlb_lockdown>
- 258:	e1a0a000 	mov	sl, r0
- 25c:	ebfffffe 	bl	0 <debug_smp_processor_id>
- 260:	e1a0100a 	mov	r1, sl
- 264:	e1a02000 	mov	r2, r0
- 268:	e3000000 	movw	r0, #0
- 26c:	e3400000 	movt	r0, #0
- 270:	ebfffffe 	bl	0 <printk>
- 274:	e1a00004 	mov	r0, r4
- 278:	ebfffffe 	bl	1018 <tlbkit_lockdown_itlb_addr>
- 27c:	ebfffffe 	bl	1000 <tlbkit_read_itlb_lockdown>
- 280:	e1a0a000 	mov	sl, r0
- 284:	ebfffffe 	bl	0 <debug_smp_processor_id>
- 288:	e1a0100a 	mov	r1, sl
- 28c:	e1a02000 	mov	r2, r0
- 290:	e3000000 	movw	r0, #0
- 294:	e3400000 	movt	r0, #0
- 298:	ebfffffe 	bl	0 <printk>
- 29c:	e3002000 	movw	r2, #0
- 2a0:	e3402000 	movt	r2, #0
- 2a4:	e3a03000 	mov	r3, #0
- 2a8:	e7d41003 	ldrb	r1, [r4, r3]
- 2ac:	e2833001 	add	r3, r3, #1
- 2b0:	e3530004 	cmp	r3, #4
- 2b4:	e4c21001 	strb	r1, [r2], #1
- 2b8:	1afffffa 	bne	2a8 <tlbkit_place_highmem_hook+0x174>
- 2bc:	e300a000 	movw	sl, #0
- 2c0:	e340a000 	movt	sl, #0
- 2c4:	e26a0004 	rsb	r0, sl, #4
- 2c8:	e0800004 	add	r0, r0, r4
- 2cc:	ebfffffe 	bl	0 <assemble_b>
- 2d0:	e58a0000 	str	r0, [sl]
- 2d4:	e0480004 	sub	r0, r8, r4
- 2d8:	ebfffffe 	bl	0 <assemble_b>
- 2dc:	e1a0200d 	mov	r2, sp
- 2e0:	e58d0000 	str	r0, [sp]
- 2e4:	e3a03000 	mov	r3, #0
- 2e8:	e4d21001 	ldrb	r1, [r2], #1
- 2ec:	e7c41003 	strb	r1, [r4, r3]
- 2f0:	e2833001 	add	r3, r3, #1
- 2f4:	e3530004 	cmp	r3, #4
- 2f8:	1afffffa 	bne	2e8 <tlbkit_place_highmem_hook+0x1b4>
- 2fc:	e5953024 	ldr	r3, [r5, #36]	@ 0x24
- 300:	e1a01009 	mov	r1, r9
- 304:	e1a00007 	mov	r0, r7
- 308:	e3a02000 	mov	r2, #0
- 30c:	e12fff33 	blx	r3
- 310:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
- 314:	e5963060 	ldr	r3, [r6, #96]	@ 0x60
- 318:	e12fff33 	blx	r3
- 31c:	e3a00001 	mov	r0, #1
- 320:	ebfffffe 	bl	0 <preempt_count_sub>
- 324:	e1a0300d 	mov	r3, sp
- 328:	e3c33d7f 	bic	r3, r3, #8128	@ 0x1fc0
- 32c:	e3c3303f 	bic	r3, r3, #63	@ 0x3f
- 330:	e5932004 	ldr	r2, [r3, #4]
- 334:	e3520000 	cmp	r2, #0
- 338:	1a00000b 	bne	36c <tlbkit_place_highmem_hook+0x238>
- 33c:	e5933000 	ldr	r3, [r3]
- 340:	e3130002 	tst	r3, #2
- 344:	0a000008 	beq	36c <tlbkit_place_highmem_hook+0x238>
- 348:	e59f3040 	ldr	r3, [pc, #64]	@ 390 <tlbkit_place_highmem_hook+0x25c>
- 34c:	e5932000 	ldr	r2, [r3]
- 350:	e59d3004 	ldr	r3, [sp, #4]
- 354:	e0332002 	eors	r2, r3, r2
- 358:	e3a03000 	mov	r3, #0
- 35c:	1a000008 	bne	384 <tlbkit_place_highmem_hook+0x250>
- 360:	e28dd00c 	add	sp, sp, #12
- 364:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 368:	eafffffe 	b	0 <preempt_schedule>
- 36c:	e59f301c 	ldr	r3, [pc, #28]	@ 390 <tlbkit_place_highmem_hook+0x25c>
- 370:	e5932000 	ldr	r2, [r3]
- 374:	e59d3004 	ldr	r3, [sp, #4]
- 378:	e0332002 	eors	r2, r3, r2
- 37c:	e3a03000 	mov	r3, #0
- 380:	0a000000 	beq	388 <tlbkit_place_highmem_hook+0x254>
- 384:	ebfffffe 	bl	0 <__stack_chk_fail>
- 388:	e28dd00c 	add	sp, sp, #12
- 38c:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
- 390:	00000000 	.word	0x00000000
+ 11c:	e3007000 	movw	r7, #0
+ 120:	e3407000 	movt	r7, #0
+ 124:	ebfffffe 	bl	0 <printk>
+ 128:	e3000000 	movw	r0, #0
+ 12c:	e3400000 	movt	r0, #0
+ 130:	ebfffffe 	bl	1bc <tlbkit_place_hook+0xb8>
+ 134:	e3c4aeff 	bic	sl, r4, #4080	@ 0xff0
+ 138:	ebfffffe 	bl	2c <ptep_flip_write_protect>
+ 13c:	e3caa00f 	bic	sl, sl, #15
+ 140:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 144:	e5973060 	ldr	r3, [r7, #96]	@ 0x60
+ 148:	e12fff33 	blx	r3
+ 14c:	e3003000 	movw	r3, #0
+ 150:	e3403000 	movt	r3, #0
+ 154:	e3002000 	movw	r2, #0
+ 158:	e3402000 	movt	r2, #0
+ 15c:	e594e000 	ldr	lr, [r4]
+ 160:	e594c004 	ldr	ip, [r4, #4]
+ 164:	e594100c 	ldr	r1, [r4, #12]
+ 168:	e5940008 	ldr	r0, [r4, #8]
+ 16c:	e5830008 	str	r0, [r3, #8]
+ 170:	e3000000 	movw	r0, #0
+ 174:	e3400000 	movt	r0, #0
+ 178:	e583e000 	str	lr, [r3]
+ 17c:	e583c004 	str	ip, [r3, #4]
+ 180:	e583100c 	str	r1, [r3, #12]
+ 184:	e2843010 	add	r3, r4, #16
+ 188:	e5823000 	str	r3, [r2]
+ 18c:	ebfffffe 	bl	1bc <tlbkit_place_hook+0xb8>
+ 190:	ebfffffe 	bl	2c <ptep_flip_write_protect>
+ 194:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 198:	e5973060 	ldr	r3, [r7, #96]	@ 0x60
+ 19c:	e12fff33 	blx	r3
+ 1a0:	e3003000 	movw	r3, #0
+ 1a4:	e3403000 	movt	r3, #0
+ 1a8:	e3a02a01 	mov	r2, #4096	@ 0x1000
+ 1ac:	e3a01d33 	mov	r1, #3264	@ 0xcc0
+ 1b0:	e5930030 	ldr	r0, [r3, #48]	@ 0x30
+ 1b4:	ebfffffe 	bl	0 <kmem_cache_alloc_trace>
+ 1b8:	e1a05000 	mov	r5, r0
+ 1bc:	e3a03000 	mov	r3, #0
+ 1c0:	e2806481 	add	r6, r0, #-2130706432	@ 0x81000000
+ 1c4:	e7da2003 	ldrb	r2, [sl, r3]
+ 1c8:	e7c52003 	strb	r2, [r5, r3]
+ 1cc:	e2833001 	add	r3, r3, #1
+ 1d0:	e3530a01 	cmp	r3, #4096	@ 0x1000
+ 1d4:	1afffffa 	bne	1c4 <tlbkit_place_hook+0xc0>
+ 1d8:	e7eb9054 	ubfx	r9, r4, #0, #12
+ 1dc:	e3a01000 	mov	r1, #0
+ 1e0:	e085b009 	add	fp, r5, r9
+ 1e4:	e3000000 	movw	r0, #0
+ 1e8:	e3400000 	movt	r0, #0
+ 1ec:	e28b2004 	add	r2, fp, #4
+ 1f0:	e3a03004 	mov	r3, #4
+ 1f4:	e34e352d 	movt	r3, #58669	@ 0xe52d
+ 1f8:	e7853009 	str	r3, [r5, r9]
+ 1fc:	ebfffffe 	bl	f0 <tlbkit_hook_handler+0x38>
+ 200:	e30f3f10 	movw	r3, #65296	@ 0xff10
+ 204:	e34e312f 	movt	r3, #57647	@ 0xe12f
+ 208:	e58b300c 	str	r3, [fp, #12]
+ 20c:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 210:	e1a00004 	mov	r0, r4
+ 214:	ebfffffe 	bl	1bc <tlbkit_place_hook+0xb8>
+ 218:	e1a08000 	mov	r8, r0
+ 21c:	e5973064 	ldr	r3, [r7, #100]	@ 0x64
+ 220:	e1a00004 	mov	r0, r4
+ 224:	e5982000 	ldr	r2, [r8]
+ 228:	e58d2000 	str	r2, [sp]
+ 22c:	e12fff33 	blx	r3
+ 230:	e3500000 	cmp	r0, #0
+ 234:	0a00000e 	beq	274 <tlbkit_place_hook+0x170>
+ 238:	e1a00004 	mov	r0, r4
+ 23c:	ebfffffe 	bl	1bc <tlbkit_place_hook+0xb8>
+ 240:	e3002000 	movw	r2, #0
+ 244:	e3402000 	movt	r2, #0
+ 248:	e5903000 	ldr	r3, [r0]
+ 24c:	e3a01024 	mov	r1, #36	@ 0x24
+ 250:	e5922000 	ldr	r2, [r2]
+ 254:	e0623623 	rsb	r3, r2, r3, lsr #12
+ 258:	e0030391 	mul	r3, r1, r3
+ 25c:	e3081e39 	movw	r1, #36409	@ 0x8e39
+ 260:	e34318e3 	movt	r1, #14563	@ 0x38e3
+ 264:	e1a03143 	asr	r3, r3, #2
+ 268:	e0222391 	mla	r2, r1, r3, r2
+ 26c:	e0892602 	add	r2, r9, r2, lsl #12
+ 270:	ea000000 	b	278 <tlbkit_place_hook+0x174>
+ 274:	e2842481 	add	r2, r4, #-2130706432	@ 0x81000000
+ 278:	e58d2004 	str	r2, [sp, #4]
+ 27c:	ebfffffe 	bl	2008 <tlbkit_get_asid>
+ 280:	e1a01000 	mov	r1, r0
+ 284:	e3000000 	movw	r0, #0
+ 288:	e3400000 	movt	r0, #0
+ 28c:	ebfffffe 	bl	0 <printk>
+ 290:	e1a0100a 	mov	r1, sl
+ 294:	e59d2004 	ldr	r2, [sp, #4]
+ 298:	e3000000 	movw	r0, #0
+ 29c:	e3400000 	movt	r0, #0
+ 2a0:	ebfffffe 	bl	0 <printk>
+ 2a4:	e1a02006 	mov	r2, r6
+ 2a8:	e1a01005 	mov	r1, r5
+ 2ac:	e3000000 	movw	r0, #0
+ 2b0:	e3400000 	movt	r0, #0
+ 2b4:	ebfffffe 	bl	0 <printk>
+ 2b8:	e3a00001 	mov	r0, #1
+ 2bc:	ebfffffe 	bl	0 <preempt_count_add>
+ 2c0:	e3003000 	movw	r3, #0
+ 2c4:	e3403000 	movt	r3, #0
+ 2c8:	e3c66eff 	bic	r6, r6, #4080	@ 0xff0
+ 2cc:	e3a02000 	mov	r2, #0
+ 2d0:	e3c6600f 	bic	r6, r6, #15
+ 2d4:	e1a00008 	mov	r0, r8
+ 2d8:	e5933000 	ldr	r3, [r3]
+ 2dc:	e1866003 	orr	r6, r6, r3
+ 2e0:	e3c61080 	bic	r1, r6, #128	@ 0x80
+ 2e4:	e3006000 	movw	r6, #0
+ 2e8:	e3406000 	movt	r6, #0
+ 2ec:	e5963024 	ldr	r3, [r6, #36]	@ 0x24
+ 2f0:	e12fff33 	blx	r3
+ 2f4:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 2f8:	e5973060 	ldr	r3, [r7, #96]	@ 0x60
+ 2fc:	e12fff33 	blx	r3
+ 300:	ebfffffe 	bl	2000 <tlbkit_read_itlb_lockdown>
+ 304:	e1a0a000 	mov	sl, r0
+ 308:	ebfffffe 	bl	0 <debug_smp_processor_id>
+ 30c:	e1a0100a 	mov	r1, sl
+ 310:	e1a02000 	mov	r2, r0
+ 314:	e3000000 	movw	r0, #0
+ 318:	e3400000 	movt	r0, #0
+ 31c:	ebfffffe 	bl	0 <printk>
+ 320:	e1a00004 	mov	r0, r4
+ 324:	ebfffffe 	bl	2018 <tlbkit_lockdown_itlb_addr>
+ 328:	ebfffffe 	bl	2000 <tlbkit_read_itlb_lockdown>
+ 32c:	e1a0a000 	mov	sl, r0
+ 330:	ebfffffe 	bl	0 <debug_smp_processor_id>
+ 334:	e1a0100a 	mov	r1, sl
+ 338:	e1a02000 	mov	r2, r0
+ 33c:	e3000000 	movw	r0, #0
+ 340:	e3400000 	movt	r0, #0
+ 344:	ebfffffe 	bl	0 <printk>
+ 348:	e7952009 	ldr	r2, [r5, r9]
+ 34c:	e1a0100b 	mov	r1, fp
+ 350:	e3000000 	movw	r0, #0
+ 354:	e3400000 	movt	r0, #0
+ 358:	ebfffffe 	bl	0 <printk>
+ 35c:	e5942000 	ldr	r2, [r4]
+ 360:	e1a01004 	mov	r1, r4
+ 364:	e3000000 	movw	r0, #0
+ 368:	e3400000 	movt	r0, #0
+ 36c:	ebfffffe 	bl	0 <printk>
+ 370:	e5963024 	ldr	r3, [r6, #36]	@ 0x24
+ 374:	e59d1000 	ldr	r1, [sp]
+ 378:	e1a00008 	mov	r0, r8
+ 37c:	e3a02000 	mov	r2, #0
+ 380:	e12fff33 	blx	r3
+ 384:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 388:	e5973060 	ldr	r3, [r7, #96]	@ 0x60
+ 38c:	e12fff33 	blx	r3
+ 390:	e3a00001 	mov	r0, #1
+ 394:	ebfffffe 	bl	0 <preempt_count_sub>
+ 398:	e1a0300d 	mov	r3, sp
+ 39c:	e3c33d7f 	bic	r3, r3, #8128	@ 0x1fc0
+ 3a0:	e3c3303f 	bic	r3, r3, #63	@ 0x3f
+ 3a4:	e5932004 	ldr	r2, [r3, #4]
+ 3a8:	e3520000 	cmp	r2, #0
+ 3ac:	1a000005 	bne	3c8 <tlbkit_place_hook+0x2c4>
+ 3b0:	e5933000 	ldr	r3, [r3]
+ 3b4:	e3130002 	tst	r3, #2
+ 3b8:	0a000002 	beq	3c8 <tlbkit_place_hook+0x2c4>
+ 3bc:	e28dd00c 	add	sp, sp, #12
+ 3c0:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 3c4:	eafffffe 	b	0 <preempt_schedule>
+ 3c8:	e28dd00c 	add	sp, sp, #12
+ 3cc:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
 
 Disassembly of section .init.text:
 
 00000000 <init_module>:
    0:	e92d4070 	push	{r4, r5, r6, lr}
-   4:	e3004000 	movw	r4, #0
-   8:	e3404000 	movt	r4, #0
-   c:	e3a01a01 	mov	r1, #4096	@ 0x1000
-  10:	e3000000 	movw	r0, #0
-  14:	e3400000 	movt	r0, #0
+   4:	e3a01a01 	mov	r1, #4096	@ 0x1000
+   8:	e3000000 	movw	r0, #0
+   c:	e3400000 	movt	r0, #0
+  10:	e3005000 	movw	r5, #0
+  14:	e3405000 	movt	r5, #0
   18:	ebfffffe 	bl	0 <printk>
-  1c:	e5943058 	ldr	r3, [r4, #88]	@ 0x58
-  20:	e3530000 	cmp	r3, #0
-  24:	1a000005 	bne	40 <init_module+0x40>
-  28:	e3000000 	movw	r0, #0
-  2c:	e3400000 	movt	r0, #0
-  30:	ebfffffe 	bl	0 <init_module>
-  34:	e584005c 	str	r0, [r4, #92]	@ 0x5c
-  38:	e12fff30 	blx	r0
-  3c:	e5840058 	str	r0, [r4, #88]	@ 0x58
-  40:	e3000000 	movw	r0, #0
-  44:	e3400000 	movt	r0, #0
-  48:	ebfffffe 	bl	0 <init_module>
-  4c:	e1a03000 	mov	r3, r0
-  50:	e3000000 	movw	r0, #0
-  54:	e3400000 	movt	r0, #0
-  58:	e5843064 	str	r3, [r4, #100]	@ 0x64
-  5c:	e3005000 	movw	r5, #0
-  60:	e3405000 	movt	r5, #0
-  64:	ebfffffe 	bl	0 <init_module>
-  68:	e1a03000 	mov	r3, r0
-  6c:	e3000000 	movw	r0, #0
-  70:	e3400000 	movt	r0, #0
-  74:	e5843060 	str	r3, [r4, #96]	@ 0x60
-  78:	ebfffffe 	bl	0 <printk>
-  7c:	e300014d 	movw	r0, #333	@ 0x14d
-  80:	ebfffffe 	bl	0 <init_module>
-  84:	e1a01000 	mov	r1, r0
-  88:	e3000000 	movw	r0, #0
-  8c:	e3400000 	movt	r0, #0
-  90:	ebfffffe 	bl	0 <printk>
-  94:	e5951000 	ldr	r1, [r5]
-  98:	e3000000 	movw	r0, #0
-  9c:	e3400000 	movt	r0, #0
-  a0:	ebfffffe 	bl	0 <printk>
-  a4:	e1a00005 	mov	r0, r5
-  a8:	ebfffffe 	bl	134 <tlbkit_place_highmem_hook>
-  ac:	e3000000 	movw	r0, #0
-  b0:	e3400000 	movt	r0, #0
-  b4:	ebfffffe 	bl	0 <printk>
-  b8:	e300014d 	movw	r0, #333	@ 0x14d
-  bc:	ebfffffe 	bl	0 <init_module>
-  c0:	e1a01000 	mov	r1, r0
-  c4:	e3000000 	movw	r0, #0
-  c8:	e3400000 	movt	r0, #0
-  cc:	ebfffffe 	bl	0 <printk>
-  d0:	e5951000 	ldr	r1, [r5]
-  d4:	e3000000 	movw	r0, #0
-  d8:	e3400000 	movt	r0, #0
-  dc:	ebfffffe 	bl	0 <printk>
-  e0:	e3000000 	movw	r0, #0
-  e4:	e3400000 	movt	r0, #0
-  e8:	ebfffffe 	bl	0 <printk>
-  ec:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
-  f0:	e5943060 	ldr	r3, [r4, #96]	@ 0x60
-  f4:	e12fff33 	blx	r3
-  f8:	e300014d 	movw	r0, #333	@ 0x14d
-  fc:	ebfffffe 	bl	0 <init_module>
- 100:	e1a01000 	mov	r1, r0
+  1c:	ebfffffe 	bl	2010 <tlbkit_read_c1>
+  20:	e1a01000 	mov	r1, r0
+  24:	e3000000 	movw	r0, #0
+  28:	e3400000 	movt	r0, #0
+  2c:	ebfffffe 	bl	0 <printk>
+  30:	e5953058 	ldr	r3, [r5, #88]	@ 0x58
+  34:	e3530000 	cmp	r3, #0
+  38:	1a000005 	bne	54 <init_module+0x54>
+  3c:	e3000000 	movw	r0, #0
+  40:	e3400000 	movt	r0, #0
+  44:	ebfffffe 	bl	0 <init_module>
+  48:	e585005c 	str	r0, [r5, #92]	@ 0x5c
+  4c:	e12fff30 	blx	r0
+  50:	e5850058 	str	r0, [r5, #88]	@ 0x58
+  54:	e3000000 	movw	r0, #0
+  58:	e3400000 	movt	r0, #0
+  5c:	ebfffffe 	bl	0 <init_module>
+  60:	e1a03000 	mov	r3, r0
+  64:	e3000000 	movw	r0, #0
+  68:	e3400000 	movt	r0, #0
+  6c:	e5853060 	str	r3, [r5, #96]	@ 0x60
+  70:	e3004000 	movw	r4, #0
+  74:	e3404000 	movt	r4, #0
+  78:	ebfffffe 	bl	0 <init_module>
+  7c:	e1a03000 	mov	r3, r0
+  80:	e3000000 	movw	r0, #0
+  84:	e3400000 	movt	r0, #0
+  88:	e5853064 	str	r3, [r5, #100]	@ 0x64
+  8c:	ebfffffe 	bl	0 <printk>
+  90:	e300014d 	movw	r0, #333	@ 0x14d
+  94:	ebfffffe 	bl	1000 <tlbkit_bad>
+  98:	e1a01004 	mov	r1, r4
+  9c:	e1a02000 	mov	r2, r0
+  a0:	e3000000 	movw	r0, #0
+  a4:	e3400000 	movt	r0, #0
+  a8:	ebfffffe 	bl	0 <printk>
+  ac:	e5942000 	ldr	r2, [r4]
+  b0:	e1a01004 	mov	r1, r4
+  b4:	e3000000 	movw	r0, #0
+  b8:	e3400000 	movt	r0, #0
+  bc:	ebfffffe 	bl	0 <printk>
+  c0:	e2840004 	add	r0, r4, #4
+  c4:	ebfffffe 	bl	104 <init_module+0x104>
+  c8:	e3000000 	movw	r0, #0
+  cc:	e3400000 	movt	r0, #0
+  d0:	ebfffffe 	bl	0 <printk>
+  d4:	e300014d 	movw	r0, #333	@ 0x14d
+  d8:	ebfffffe 	bl	1000 <tlbkit_bad>
+  dc:	e1a01004 	mov	r1, r4
+  e0:	e1a02000 	mov	r2, r0
+  e4:	e3000000 	movw	r0, #0
+  e8:	e3400000 	movt	r0, #0
+  ec:	ebfffffe 	bl	0 <printk>
+  f0:	e5942000 	ldr	r2, [r4]
+  f4:	e1a01004 	mov	r1, r4
+  f8:	e3000000 	movw	r0, #0
+  fc:	e3400000 	movt	r0, #0
+ 100:	ebfffffe 	bl	0 <printk>
  104:	e3000000 	movw	r0, #0
  108:	e3400000 	movt	r0, #0
  10c:	ebfffffe 	bl	0 <printk>
- 110:	e5951000 	ldr	r1, [r5]
- 114:	e3000000 	movw	r0, #0
- 118:	e3400000 	movt	r0, #0
- 11c:	ebfffffe 	bl	0 <printk>
- 120:	e3a00000 	mov	r0, #0
- 124:	e8bd8070 	pop	{r4, r5, r6, pc}
+ 110:	ebfffffe 	bl	0 <v7_flush_kern_cache_all>
+ 114:	e5953060 	ldr	r3, [r5, #96]	@ 0x60
+ 118:	e12fff33 	blx	r3
+ 11c:	e300014d 	movw	r0, #333	@ 0x14d
+ 120:	ebfffffe 	bl	1000 <tlbkit_bad>
+ 124:	e1a01004 	mov	r1, r4
+ 128:	e1a02000 	mov	r2, r0
+ 12c:	e3000000 	movw	r0, #0
+ 130:	e3400000 	movt	r0, #0
+ 134:	ebfffffe 	bl	0 <printk>
+ 138:	e5942000 	ldr	r2, [r4]
+ 13c:	e1a01004 	mov	r1, r4
+ 140:	e3000000 	movw	r0, #0
+ 144:	e3400000 	movt	r0, #0
+ 148:	ebfffffe 	bl	0 <printk>
+ 14c:	e3a00000 	mov	r0, #0
+ 150:	e8bd8070 	pop	{r4, r5, r6, pc}
 
 Disassembly of section .exit.text:
 
@@ -519,92 +611,7 @@ Disassembly of section .exit.text:
    4:	e3400000 	movt	r0, #0
    8:	eafffffe 	b	0 <printk>
 
-Disassembly of section .tlbkit.text:
-
-00000000 <tlbkit_bad>:
-       0:	e3a000de 	mov	r0, #222	@ 0xde
-       4:	e1a0f00e 	mov	pc, lr
-       8:	e320f000 	nop	{0}
-       c:	e320f000 	nop	{0}
-      10:	e320f000 	nop	{0}
-      14:	e320f000 	nop	{0}
-      18:	e320f000 	nop	{0}
-      1c:	e320f000 	nop	{0}
-      20:	e320f000 	nop	{0}
-      24:	e320f000 	nop	{0}
-      28:	e320f000 	nop	{0}
-      2c:	e320f000 	nop	{0}
-      30:	e320f000 	nop	{0}
-      34:	e320f000 	nop	{0}
-      38:	e320f000 	nop	{0}
-      3c:	e320f000 	nop	{0}
-	...
-
-00001000 <tlbkit_read_itlb_lockdown>:
-    1000:	ee1a0f30 	mrc	15, 0, r0, cr10, cr0, {1}
-    1004:	e1a0f00e 	mov	pc, lr
-
-00001008 <tlbkit_get_asid>:
-    1008:	ee1d0f30 	mrc	15, 0, r0, cr13, cr0, {1}
-    100c:	e1a0f00e 	mov	pc, lr
-
-00001010 <tlbkit_read_c1>:
-    1010:	ee110f51 	mrc	15, 0, r0, cr1, cr1, {2}
-    1014:	e1a0f00e 	mov	pc, lr
-
-00001018 <tlbkit_lockdown_itlb_addr>:
-    1018:	f57ff04f 	dsb	sy
-    101c:	e1a01000 	mov	r1, r0
-    1020:	ee081f35 	mcr	15, 0, r1, cr8, cr5, {1}
-    1024:	e3a00211 	mov	r0, #268435457	@ 0x10000001
-    1028:	e3a02401 	mov	r2, #16777216	@ 0x1000000
-    102c:	ee0a0f30 	mcr	15, 0, r0, cr10, cr0, {1}
-    1030:	ee0a1f31 	mcr	15, 0, r1, cr10, cr1, {1}
-    1034:	ee0a2f30 	mcr	15, 0, r2, cr10, cr0, {1}
-    1038:	f57ff04f 	dsb	sy
-    103c:	f57ff06f 	isb	sy
-    1040:	e1a0f00e 	mov	pc, lr
-    1044:	e320f000 	nop	{0}
-    1048:	e320f000 	nop	{0}
-    104c:	e320f000 	nop	{0}
-    1050:	e320f000 	nop	{0}
-    1054:	e320f000 	nop	{0}
-    1058:	e320f000 	nop	{0}
-    105c:	e320f000 	nop	{0}
-    1060:	e320f000 	nop	{0}
-    1064:	e320f000 	nop	{0}
-    1068:	e320f000 	nop	{0}
-    106c:	e320f000 	nop	{0}
-    1070:	e320f000 	nop	{0}
-    1074:	e320f000 	nop	{0}
-    1078:	e320f000 	nop	{0}
-    107c:	e320f000 	nop	{0}
-	...
-
-00002000 <tlbkit_handler_dispatch>:
-    2000:	e24dd048 	sub	sp, sp, #72	@ 0x48
-    2004:	e88d7fff 	stm	sp, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, sp, lr}
-    2008:	e1a0000d 	mov	r0, sp
-    200c:	ebfffffe 	bl	fc <tlbkit_bad+0xfc>
-    2010:	e89d7fff 	ldm	sp, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, sp, lr}
-    2014:	e28dd048 	add	sp, sp, #72	@ 0x48
-
-00002018 <tlbkit_handler_dispatch_reloc>:
-    2018:	e320f000 	nop	{0}
-
-0000201c <tlbkit_handler_dispatch_reloc_a>:
-    201c:	e320f000 	nop	{0}
-    2020:	e320f000 	nop	{0}
-    2024:	e320f000 	nop	{0}
-    2028:	e320f000 	nop	{0}
-    202c:	e320f000 	nop	{0}
-    2030:	e320f000 	nop	{0}
-    2034:	e320f000 	nop	{0}
-    2038:	e320f000 	nop	{0}
-    203c:	e320f000 	nop	{0}
-	...
-
 Disassembly of section .plt:
 
-00003000 <.plt>:
+0000000c <.plt>:
 	...
