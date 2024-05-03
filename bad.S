@@ -41,6 +41,13 @@ SYM_FUNC_START(tlbkit_read_c1)
 SYM_FUNC_END(tlbkit_read_c1)
 
 
+SYM_FUNC_START(tlbkit_prefetch_itlb)
+    mcr         p15, 0, r0, c8, c5, 1  @ Invalidate TLB entry corresponding to VA
+    mcr         p15, 0, r0, c10, c1, 1 @ Prefetch I-TLB, note: prefetch needs to be -2 words ahead ?
+    dsb
+    isb
+    mov         pc, lr
+SYM_FUNC_END(tlbkit_prefetch_itlb)
 
 @ FIX THIS !!, actually survies flush_tlb_all so maybe its correct ?
 SYM_FUNC_START(tlbkit_lockdown_itlb_addr)

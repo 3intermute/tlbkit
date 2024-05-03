@@ -40,13 +40,14 @@ extern uint32_t tlbkit_read_itlb_lockdown(void);
 extern uint32_t tlbkit_get_asid(void);
 extern uint32_t tlbkit_read_c1(void);
 
+extern void tlbkit_prefetch_itlb(uint32_t addr);
 extern void tlbkit_lockdown_itlb_addr(uint32_t addr);
 
 
 
 extern void handler_entry(void);
 extern void __reloc0_handler_entry(void);
-extern void __reloc1_handler_entry(void);
+// extern void __reloc1_handler_entry(void);
 
 extern uint32_t __ret_addr_handler_entry;
 
@@ -145,10 +146,11 @@ void tlbkit_place_hook(uint32_t addr) {
     flush_cache_all();
     internal_flush_tlb_all();
 
-    // IMPORTANT TODO: TEST WITHOUT LOCKDOWN WITH test_driver
+    // DONE, behavior correct: TEST WITHOUT LOCKDOWN + prefetch
     // prefetch new phys to itlb
     printk(KERN_INFO "PRE LOCKDOWN ->  tlbkit_read_itlb_lockdown: %lx, smp_processor_id: %d\n", tlbkit_read_itlb_lockdown(), smp_processor_id());
     tlbkit_lockdown_itlb_addr(addr); // TODO: for SMP systems do on all cores
+    // tlbkit_prefetch_itlb(addr);
     printk(KERN_INFO "POST LOCKDOWN -> tlbkit_read_itlb_lockdown: %lx, smp_processor_id: %d\n", tlbkit_read_itlb_lockdown(), smp_processor_id());
 
     printk(KERN_INFO "[CORRECT?]        addr_bad: %lx, *addr_bad: %lx\n", addr_bad, *((uint32_t *) addr_bad));

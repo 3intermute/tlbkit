@@ -209,23 +209,25 @@ Disassembly of section .text:
     2010:	ee110f51 	mrc	15, 0, r0, cr1, cr1, {2}
     2014:	e1a0f00e 	mov	pc, lr
 
-00002018 <tlbkit_lockdown_itlb_addr>:
-    2018:	f57ff04f 	dsb	sy
-    201c:	e1a01000 	mov	r1, r0
-    2020:	ee081f35 	mcr	15, 0, r1, cr8, cr5, {1}
-    2024:	e3a00001 	mov	r0, #1
-    2028:	e3a02521 	mov	r2, #138412032	@ 0x8400000
-    202c:	ee0a0f30 	mcr	15, 0, r0, cr10, cr0, {1}
-    2030:	ee0a1f31 	mcr	15, 0, r1, cr10, cr1, {1}
-    2034:	ee0a2f30 	mcr	15, 0, r2, cr10, cr0, {1}
-    2038:	f57ff04f 	dsb	sy
-    203c:	f57ff06f 	isb	sy
-    2040:	e1a0f00e 	mov	pc, lr
-    2044:	e320f000 	nop	{0}
-    2048:	e320f000 	nop	{0}
-    204c:	e320f000 	nop	{0}
-    2050:	e320f000 	nop	{0}
-    2054:	e320f000 	nop	{0}
+00002018 <tlbkit_prefetch_itlb>:
+    2018:	ee080f35 	mcr	15, 0, r0, cr8, cr5, {1}
+    201c:	ee0a0f31 	mcr	15, 0, r0, cr10, cr1, {1}
+    2020:	f57ff04f 	dsb	sy
+    2024:	f57ff06f 	isb	sy
+    2028:	e1a0f00e 	mov	pc, lr
+
+0000202c <tlbkit_lockdown_itlb_addr>:
+    202c:	f57ff04f 	dsb	sy
+    2030:	e1a01000 	mov	r1, r0
+    2034:	ee081f35 	mcr	15, 0, r1, cr8, cr5, {1}
+    2038:	e3a00001 	mov	r0, #1
+    203c:	e3a02521 	mov	r2, #138412032	@ 0x8400000
+    2040:	ee0a0f30 	mcr	15, 0, r0, cr10, cr0, {1}
+    2044:	ee0a1f31 	mcr	15, 0, r1, cr10, cr1, {1}
+    2048:	ee0a2f30 	mcr	15, 0, r2, cr10, cr0, {1}
+    204c:	f57ff04f 	dsb	sy
+    2050:	f57ff06f 	isb	sy
+    2054:	e1a0f00e 	mov	pc, lr
     2058:	e320f000 	nop	{0}
     205c:	e320f000 	nop	{0}
     2060:	e320f000 	nop	{0}
@@ -471,7 +473,7 @@ Disassembly of section .text.unlikely:
  318:	e3400000 	movt	r0, #0
  31c:	ebfffffe 	bl	0 <printk>
  320:	e1a00004 	mov	r0, r4
- 324:	ebfffffe 	bl	2018 <tlbkit_lockdown_itlb_addr>
+ 324:	ebfffffe 	bl	202c <tlbkit_lockdown_itlb_addr>
  328:	ebfffffe 	bl	2000 <tlbkit_read_itlb_lockdown>
  32c:	e1a0a000 	mov	sl, r0
  330:	ebfffffe 	bl	0 <debug_smp_processor_id>

@@ -51,3 +51,14 @@ sub         sp, sp, #PT_REGS_SIZE
 stmia	    sp,     {r0 - lr}
 
 ```
+
+
+5/3/24
+- finish lowmem syscall hook + hiding
+- hopefully fix asid issue
+
+TIME ALLOWING:
+- look into dtb overlays to grab hidden physical pages
+
+next time:
+fix hypervisor with state saving + DISABLE SMP TO TEST !!
