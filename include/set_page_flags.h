@@ -1,21 +1,47 @@
 #ifndef _SET_PAGE_FLAGS_H_
 #define _SET_PAGE_FLAGS_H_
 
-#include <asm/pgtable.h>
+
+#include <linux/pgtable.h>
+// #include <asm/pgtable.h>
 // #include <linux/align.h>
 #include "resolve_kallsyms.h"
 
-static struct mm_struct *init_mm_ptr = NULL;
-struct mm_struct *(*copy_init_mm_internal)(void) = NULL;
+// holy shit arm32 is weird
+// https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/arm/include/asm/pgtable-2level.h
+
+struct mm_struct *init_mm_ptr = NULL;
+struct mm_struct *(*internal_copy_init_mm)(void) = NULL;
 
 static void init_init_mm_ptr(void) {
     if (!init_mm_ptr) {
-        copy_init_mm_internal = rk_kallsyms_lookup_name("copy_init_mm");
-        init_mm_ptr = copy_init_mm_internal();
+        internal_copy_init_mm = rk_kallsyms_lookup_name("copy_init_mm");
+        init_mm_ptr = internal_copy_init_mm();
+        printk(KERN_INFO "debug: init_mm_ptr->pgd: %lx\n", init_mm_ptr->pgd);
+        printk(KERN_INFO "                   *pgd: %lx\n", *(init_mm_ptr->pgd));
     }
 }
 
-pte_t *virt_to_ptep(uint32_t addr) {
+// // #define internal_pgd_offset_k(address)		pgd_offset(init_mm_ptr, (address))
+// pgd_offset_pgd(pgd, (address))
+
+// static inline pmd_t *internal_pmd_off_k(unsigned long va)
+// {
+//     init_init_mm_ptr();
+// 	return pmd_offset(pud_offset(p4d_offset(internal_pgd_offset_k(va), va), va), va);
+// }
+
+// static inline pte_t *internal_virt_to_kpte(unsigned long vaddr)
+// {
+// 	pmd_t *pmd = internal_pmd_off_k(vaddr);
+
+// 	return pmd_none(*pmd) ? NULL : pte_offset_kernel(pmd, vaddr);
+// }
+
+
+
+// IMPORTANT: this only works for highmem addresses perhaps due to split ttbr0, ttbr1
+pte_t *highmem_virt_to_ptep(uint32_t addr) {
     init_init_mm_ptr();
 
     addr &= PAGE_MASK; // TODO: do in 1 inst via PAGE_MASK
@@ -27,6 +53,7 @@ pte_t *virt_to_ptep(uint32_t addr) {
     pte_t *ptep;
 
     pgdp = pgd_offset(init_mm_ptr, addr);
+    // pgdp = pgd_offset_k(addr)
     if (pgd_none(*pgdp)) {
         return NULL;
     }
@@ -58,12 +85,15 @@ pte_t *virt_to_ptep(uint32_t addr) {
     //     return pmdp;
     // }
 
+
     ptep = pte_offset_kernel(pmdp, addr);
     if (!ptep) {
         return NULL;
     }
 
     printk(KERN_INFO "debug: virt_to_ptep success, virt (%lx), *ptep %lx\n", addr, *ptep);
+    printk(KERN_INFO "debug:            pgd: %lx\n", pgdp);
+    printk(KERN_INFO "                  *pgd: %lx\n", *(pgdp));
     // printk(KERN_INFO "debug:        ptep: %lx\n", ptep);
     // printk(KERN_INFO "debug:        pgdp: %lx\n", pgdp);
     // printk(KERN_INFO "debug:        *pgdp: %lx\n", *pgdp);
@@ -71,6 +101,14 @@ pte_t *virt_to_ptep(uint32_t addr) {
 
     return ptep;
 }
+
+pte_t *virt_to_ptep(uint32_t addr) {
+    init_init_mm_ptr();
+
+    // return internal_virt_to_kpte(addr);
+    return highmem_virt_to_ptep(addr);
+}
+
 
 void ptep_flip_write_protect(pte_t *ptep) {
     if (!pte_write(*ptep)) {
@@ -83,21 +121,6 @@ void ptep_flip_write_protect(pte_t *ptep) {
         set_pte_ext(ptep, pte_wrprotect(*ptep), 0);
     }
 }
-
-// dep
-/*
-void arm64_ptep_flip_write_protect(pte_t *ptep) {
-    if (!pte_write(*ptep)) {
-        *ptep = pte_mkwrite(pte_mkdirty(*ptep));
-        *ptep = clear_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
-
-        return;
-    }
-
-    *ptep = pte_wrprotect(*ptep);
-    *ptep = set_pte_bit(*ptep, __pgprot((_AT(pteval_t, 1) << 7)));
-}
-*/
 
 static unsigned long highmem_pte_to_phys(pte_t *ptep) {
     struct page *p = pte_page(*ptep);

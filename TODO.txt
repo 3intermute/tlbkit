@@ -55,6 +55,7 @@ stmia	    sp,     {r0 - lr}
 
 5/3/24
 - finish lowmem syscall hook + hiding
+    - hook sys_kill
 - hopefully fix asid issue
 
 TIME ALLOWING:
