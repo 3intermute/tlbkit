@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /**
- * @file resolve_ksyms.h
+ * @file resolve_kallsyms.h
  * @author wintermute
  * @date 5/20/2023
  * @brief provides a wrapper to use kallsyms_lookup_name as it is not exported
@@ -31,7 +31,7 @@
 #include <linux/ftrace.h>
 #include <asm/unistd.h>
 
-static unsigned long (*rk_kallsyms_lookup_name_internal)(const char *) = NULL;
+static unsigned long (*kallsyms_lookup_name_local)(const char *) = NULL;
 
 /**
  * @brief finds the address of a kernel function via kprobes
@@ -41,7 +41,7 @@ static unsigned long (*rk_kallsyms_lookup_name_internal)(const char *) = NULL;
  * @param func_name function name
  * @return address of function
  */
-unsigned long rk_kprobe_get_func_addr(const char *func_name) {
+unsigned long kprobe_get_func_addr(const char *func_name) {
     if (!func_name) {
         return -ENOENT;
     }
@@ -49,14 +49,20 @@ unsigned long rk_kprobe_get_func_addr(const char *func_name) {
     static struct kprobe kp;
     kp.symbol_name = func_name;
     if (register_kprobe(&kp) < 0) {
-        printk(KERN_DEBUG "resolve_kallsyms: register_kprobe for func %s failed\n", func_name);
+        printk(KERN_DEBUG "debug: register_kprobe for func %s failed\n", func_name);
         return -ENOENT;
     }
 
     unsigned long tmp = kp.addr;
     unregister_kprobe(&kp);
-    printk(KERN_DEBUG "resolve_kallsyms: register_kprobe found func %s @ %lx\n", func_name, tmp);
+    printk(KERN_DEBUG "debug: register_kprobe found func %s @ %lx\n", func_name, tmp);
     return tmp;
+}
+
+static void export_kallsyms_lookup_name(void) {
+    if (!kallsyms_lookup_name_local) {
+        kallsyms_lookup_name_local = kprobe_get_func_addr("kallsyms_lookup_name");
+    }
 }
 
 /**
@@ -65,17 +71,15 @@ unsigned long rk_kprobe_get_func_addr(const char *func_name) {
  * @param symbol_name symbol name
  * @return address of symbol
  */
-unsigned long rk_kallsyms_lookup_name(const char *symbol_name) {
+unsigned long kallsyms_lookup_name_exported(const char *symbol_name) {
     if (!symbol_name) {
         return -ENOENT;
     }
 
-    if (!rk_kallsyms_lookup_name_internal) {
-        rk_kallsyms_lookup_name_internal = rk_kprobe_get_func_addr("kallsyms_lookup_name");
-    }
+    export_kallsyms_lookup_name();
 
-    unsigned long tmp = rk_kallsyms_lookup_name_internal(symbol_name);
-    printk(KERN_DEBUG "resolve_kallsyms: kallsyms_lookup_name found func %s @ %lx\n", symbol_name, tmp);
+    unsigned long tmp = kallsyms_lookup_name_local(symbol_name);
+    printk(KERN_DEBUG "debug: kallsyms_lookup_name found func %s @ %lx\n", symbol_name, tmp);
     return tmp;
 }
 

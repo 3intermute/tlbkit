@@ -7,3 +7,7 @@ Module.symvers
 modules.order
 .tmp_versions/
 _module_build
+*.bak
+dep/
+notes.txt
+chat.txt
